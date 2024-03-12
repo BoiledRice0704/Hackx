@@ -1,10 +1,11 @@
 import React from 'react'
+import { Home } from './components/Home'
 
 const App = () => {
   return (
-    <div className='text-red-500 text-2xl' style={{fontFamily:"Gotham Rounded Book"}}>
-        hi
-    </div>
+    <>
+      <Home/>
+    </>
   )
 }
 
