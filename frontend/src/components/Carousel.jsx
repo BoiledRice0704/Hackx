@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {setIndex} from '../slices/generalSlice';
+
 
 const Carousel = ({ images }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const dispatch = useDispatch()
+  const currentIndex = useSelector((state)=>state.counter.index)
+  // const [currentIndex, setCurrentIndex] = useState(0);
   const totalSlides = images.length;
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((currentIndex + 1) % totalSlides);
+      dispatch(setIndex((currentIndex + 1) % totalSlides));
     }, 2000); // Change slide every 5 seconds
 
     return () => clearInterval(interval);
