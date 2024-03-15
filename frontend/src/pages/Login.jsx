@@ -5,7 +5,6 @@ import { motion } from "framer-motion"
 
 import { useSelector } from "react-redux";
 
-import "../assets/login.css";
 
 import googleLogo from "../assets/google.svg";
 const image1 =
