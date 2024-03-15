@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import Carousel from "../components/Carousel";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion"
-
+import  Google from "./Google"
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import { useSelector } from "react-redux";
 
-import "../assets/login.css";
+// import "../assets/login.css";
 
 import googleLogo from "../assets/google.svg";
 const image1 =
@@ -120,6 +121,9 @@ const Login = () => {
           </span>
         </div>
       </div>
+      <GoogleOAuthProvider clientId="1072771106403-geoogdmeu3mfecn4vgq9t0j5mhvk8ea0.apps.googleusercontent.com">
+          <Google />
+        </GoogleOAuthProvider>
     </div>
   );
 };
