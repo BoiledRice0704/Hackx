@@ -9,7 +9,11 @@ const Home = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState("");
+  const [index, setIndex] = useState(0);
   const [text, setText] = useState("");
+  const handleChange = (event) => {
+    setSelectedLanguage(event.target.value);
+  };
   const synthesis = window.speechSynthesis;
   let recognition;
 
@@ -61,13 +65,16 @@ const Home = () => {
   };
   const sendTranscript = async () => {
     try {
-      const response = await fetch("http://localhost:8001/api/translate_input_to_english", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ transcript: transcript }),
-      });
+      const response = await fetch(
+        `http://localhost:8001/api/translate_input_to_${index}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ transcript: transcript }),
+        }
+      );
       if (response.ok) {
         const data = await response.json();
         console.log("Transcript sent successfully");
@@ -80,7 +87,7 @@ const Home = () => {
     } catch (err) {
       console.error("Error sending transcript:", err);
     }
-  }
+  };
   const speak = () => {
     const utterance = new SpeechSynthesisUtterance(text);
     synthesis.speak(utterance);
@@ -131,6 +138,36 @@ const Home = () => {
           {/* <button onClick={sendTranscript} disabled={!transcript}>
             Send Transcript
           </button> */}
+          <div>
+            <h2>Select your preferred language:</h2>
+            <label>
+              <input
+                type="radio"
+                value="english"
+                checked={selectedLanguage === "english"}
+                onChange={handleChange}
+              />
+              English
+            </label>
+            <label>
+              <input
+                type="radio"
+                value="hindi"
+                checked={selectedLanguage === "hindi"}
+                onChange={handleChange}
+              />
+              Hindi
+            </label>
+            <label>
+              <input
+                type="radio"
+                value="spanish"
+                checked={selectedLanguage === "spanish"}
+                onChange={handleChange}
+              />
+              Spanish
+            </label>
+          </div>
           <p>{transcript}</p>
         </div>
       </div>
