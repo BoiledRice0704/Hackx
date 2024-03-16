@@ -8,7 +8,7 @@ import Mic from "../assets/microphone.png";
 const Home = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [isListening, setIsListening] = useState(false);
-  const [transcript, setTranscript] = useState("");
+  let transcript;
   const recognition = new window.webkitSpeechRecognition(); // Using webkitSpeechRecognition for Chrome compatibility
 
   recognition.continuous = true;
@@ -26,7 +26,7 @@ const Home = () => {
     let finalTranscript = "";
 
     for (let i = event.resultIndex; i < event.results.length; i++) {
-      setTranscript(event.results[i][0].transcript);
+      transcript = event.results[i][0].transcript;
       console.log(transcript);
       if (event.results[i].isFinal) {
         finalTranscript += transcript + " ";
@@ -35,7 +35,7 @@ const Home = () => {
         interimTranscript += transcript;
       }
     }
-    setTranscript(finalTranscript);
+    transcript = finalTranscript;
   };
 
   recognition.onerror = (event) => {
@@ -45,16 +45,18 @@ const Home = () => {
 
   const toggleListening = () => {
     if (isListening) {
+      console.log('Stopping listening...');
       recognition.stop();
       setIsListening(false);
-      sendTranscript;
+      console.log('Sending trans');
+      sendTranscript();
     } else {
       recognition.start();
     }
   };
   const sendTranscript = () => {
     // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint
-    fetch('http://localhost:8080/api/audio_prompt', {
+    fetch('http://localhost:8001/api/audio_input', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
