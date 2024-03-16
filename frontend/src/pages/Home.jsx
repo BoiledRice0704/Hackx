@@ -65,19 +65,26 @@ const Home = () => {
       },
       body: JSON.stringify({ transcript: transcript }),
     })
-      .then((response) => {
-        console.log(response.body);
-        if (response.ok) {
-          console.log("Transcript sent successfully");
-          setText(response.body.message);
-          speak();
-        } else {
-          console.error("Failed to send transcript");
-        }
-      })
-      .catch((error) => {
-        console.error("Error sending transcript:", error);
-      });
+    .then((response) => {
+      // Check if the response is successful
+      if (response.ok) {
+          // Parse the JSON response
+          return response.json();
+      } else {
+          throw new Error("Failed to send transcript");
+      }
+  })
+  .then((data) => {
+      console.log("Transcript sent successfully");
+      // Access the JSON data and do something with it
+      console.log(data);
+      setText(data.message);
+      speak();
+  })
+  .catch((error) => {
+      // Catch any errors that occurred during the fetch request
+      console.error("Error sending transcript:", error);
+  });
   };
   const speak = () => {
     const utterance = new SpeechSynthesisUtterance(text);

@@ -35,3 +35,6 @@
 }
 
 
+.parallax div::-webkit-scrollbar {
+	display: none;
+  }

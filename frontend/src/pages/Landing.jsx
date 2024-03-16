@@ -96,7 +96,7 @@ const Landing = () => {
         </div>
         <nav className="w-full flex justify-between p-5 fixed top-0">
           <div className="text-white  text-4xl">VartaLang</div>
-          <div className="text-right text-[1.8rem]">
+          <div className="text-right text-3xl">
             <Link to="/login">
               <h1 className="animate-gradient-text ">Login/Signup</h1>
             </Link>
