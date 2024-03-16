@@ -4,6 +4,7 @@ import { Home } from './pages/Home';
 import Login from './pages/Login';
 import { AuthProvider } from './contexts/authContext';
 import Landing from './pages/Landing';
+import Chat from './pages/Chat';
 
 const App = () => {
   return (
@@ -14,7 +15,9 @@ const App = () => {
         <Routes>
           <Route path="/d" element={<Home />} />
           <Route path="/" element={<Landing />} />
+          <Route path="/chat" element={<Chat/>} />
           <Route path="/login" element={<AuthProvider><Login/></AuthProvider>} />
+
         </Routes>
       </BrowserRouter>
     </>
