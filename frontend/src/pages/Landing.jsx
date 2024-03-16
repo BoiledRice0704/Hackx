@@ -30,7 +30,7 @@ const Landing = () => {
     }
   }, [parallaxRef]);
 
-  useEffect
+  useEffect;
 
   return (
     <div
@@ -39,44 +39,59 @@ const Landing = () => {
     >
       <div className="background w-full min-h-[100vh] relative">
         <div
-          className="parallax h-[85vh] border-white border-[5px] absolute w-full top-[5rem]"
+          className="parallax h-[85vh] absolute w-full top-[5rem]"
           ref={parallaxRef}
         >
-          <Parallax pages={2}>
+          <Parallax pages={1.6}>
             <ParallaxLayer offset={0} speed={0.1}>
-            <div className="border-2 border-white top-[50%] absolute mx-auto w-full font-light text-center" 
-            style={{width: `${Math.max(1.65, 3 - scrollPosition / 75)}rem`}}/>
-              <motion.h1
-                className="text-white top-[50%] absolute mx-auto w-full font-light text-center"
+                <div className="flex flex-col w-full h-full justify-around items-center">
+              <motion.div
+                className="text-white font-light text-center w-fit "
+                style={{
+                  fontSize: `${Math.max(1.65, 3 - scrollPosition / 75)}rem`,
+                  opacity: `${100 - scrollPosition / 1.2}%`,
+                  
+                }}
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
                 transition={{ delay: 0.1 }}
-                style={{
-                  fontSize: `${Math.max(1.65, 3 - scrollPosition / 75)}rem`,
-                  opacity:`${100-scrollPosition/1.2}%`
-                }}
               >
                 Communicate without any <br />
                 language barrier!
-              </motion.h1>
+              </motion.div>
+              </div>
             </ParallaxLayer>
-            <ParallaxLayer offset={0.5} speed={0.5}>
+            <ParallaxLayer offset={0.5} speed={1}>
               <motion.h1
                 className="text-white top-[50%] absolute mx-auto w-full text-5xl font-light text-center "
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
                 transition={{ delay: 0.1 }}
+                style={{
+                    fontSize: `${Math.max(1.35, 2.5 + (200-scrollPosition) / 75)}rem`,
+                    opacity: `${(300 - scrollPosition) / 1.2}%`,
+                    
+                  }}    
               >
-                Communicate without any <br />
-                language barrier!
+                Virtual Meetings, Real Connections:<br/> Break Language Barriers Effortlessly
               </motion.h1>
             </ParallaxLayer>
-            <ParallaxLayer
-              offset={1}
-              speed={2}
-              style={{ backgroundColor: "#87BCDE" }}
-            />
-            <ParallaxLayer offset={0} speed={0} factor={3} />
+            <ParallaxLayer offset={0.8} speed={1}>
+              <motion.h1
+                className="text-white top-[80%] absolute mx-auto w-full text-5xl font-light text-center "
+                initial={{ y: -100 }}
+                animate={{ y: 0 }}
+                transition={{ delay: 0.1 }}
+                style={{
+                    // fontSize: `${Math.max(1.35, 2 + (400-scrollPosition) / 75)}rem`,
+                    
+                    
+                  }}    
+              >
+                Chat Across Cultures:<br/> Instant Translation for Seamless Conversations
+              </motion.h1>
+            </ParallaxLayer>
+            
           </Parallax>
         </div>
         <nav className="w-full flex justify-between p-5 fixed top-0">
