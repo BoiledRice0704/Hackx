@@ -33,8 +33,16 @@ app.get("/api/model_parameters_prompt", (req, res) => {
   controller.runTextParameters(req, res);
 });
 
-app.post("/api/audio_input", (req, res) => {
-  controller.audioInputRun(req, res);
+app.post("/api/translate_input_to_english", (req, res) => {
+  controller.audioInputToEnglish(req, res);
+});
+
+app.post("/api/translate_input_to_hindi", (req, res) => {
+  controller.audioInputToHindi(req, res);
+});
+
+app.post("/api/translate_input_to_spanish", (req, res) => {
+  controller.audioInputToSpanish(req, res);
 });
 
 app.listen(port, () => {

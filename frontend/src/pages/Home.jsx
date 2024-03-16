@@ -57,9 +57,9 @@ const Home = () => {
       recognition.start();
     }
   };
-  const sendTranscript = (s = async () => {
+  const sendTranscript = async () => {
     try {
-      const response = await fetch("http://localhost:8001/api/audio_input", {
+      const response = await fetch("http://localhost:8001/api/translate_input_to_english", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -78,7 +78,7 @@ const Home = () => {
     } catch (err) {
       console.error("Error sending transcript:", err);
     }
-  });
+  }
   const speak = () => {
     const utterance = new SpeechSynthesisUtterance(text);
     synthesis.speak(utterance);
