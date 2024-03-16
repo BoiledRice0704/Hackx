@@ -3,6 +3,7 @@ import bg from "../assets/Landing/bg.jpeg";
 import "../assets/Landing/landing.css";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Landing = () => {
   return (
@@ -17,9 +18,11 @@ const Landing = () => {
         <Parallax pages={2}>
           <ParallaxLayer offset={0}
             speed={1}>
-            <h1 className="text-white top-[50%] absolute text-center left-[50%] translate-x-[-50%] text-4xl font-bold">
+            <motion.h1 className="text-white top-[50%] absolute  text-5xl font-light text-center w-full" initial={{ }}
+            animate={{ y: 0 }}
+            transition={{ delay: 0.1 }}>
                 Communicate without any <br />language barrier!
-            </h1>
+            </motion.h1>
           </ParallaxLayer>
           <ParallaxLayer
             offset={0.8}
