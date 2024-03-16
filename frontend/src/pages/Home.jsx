@@ -8,11 +8,13 @@ const Home = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState("");
+  const [text, setText] = useState('');
+  const synthesis = window.speechSynthesis;
   let recognition;
 
   const toggleListening = () => {
     if (isListening) {
-      console.log('Stopping listening...');
+      console.log("Stopping listening...");
       recognition.stop();
       setIsListening(false);
       sendTranscript();
@@ -64,9 +66,11 @@ const Home = () => {
       body: JSON.stringify({ transcript: transcript }),
     })
       .then((response) => {
-        console.log(response);
+        console.log(response.body);
         if (response.ok) {
           console.log("Transcript sent successfully");
+          setText(response.body.message);
+          speak();
         } else {
           console.error("Failed to send transcript");
         }
@@ -74,6 +78,10 @@ const Home = () => {
       .catch((error) => {
         console.error("Error sending transcript:", error);
       });
+  };
+  const speak = () => {
+    const utterance = new SpeechSynthesisUtterance(text);
+    synthesis.speak(utterance);
   };
   return (
     <div>
