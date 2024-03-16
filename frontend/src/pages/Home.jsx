@@ -1,6 +1,6 @@
 // Home.js
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import "../App.css";
 import Mic from "../assets/microphone.png";
@@ -8,6 +8,51 @@ import Mic from "../assets/microphone.png";
 const Home = () => {
   const [isClicked, setIsClicked] = useState(false);
 
+  const [isListening, setIsListening] = useState(false);
+  const [transcript, setTranscript] = useState("");
+  const recognition = new window.webkitSpeechRecognition(); // Using webkitSpeechRecognition for Chrome compatibility
+
+  recognition.continuous = true;
+  recognition.interimResults = true;
+  recognition.lang = "en-US";
+
+  recognition.onstart = () => {
+    setIsListening(true);
+    console.log("Speech recognition started");
+  };
+
+  recognition.onresult = (event) => {
+    console.log('Entered onresult');
+    let interimTranscript = "";
+    let finalTranscript = "";
+
+    for (let i = event.resultIndex; i < event.results.length; i++) {
+      const transcript = event.results[i][0].transcript;
+      console.log(transcript);
+      if (event.results[i].isFinal) {
+        finalTranscript += transcript + " ";
+        console.log(finalTranscript);
+      } else {
+        interimTranscript += transcript;
+      }
+    }
+
+    setTranscript(finalTranscript);
+  };
+
+  recognition.onerror = (event) => {
+    console.error("Speech recognition error:", event.error);
+    setIsListening(false);
+  };
+
+  const toggleListening = () => {
+    if (isListening) {
+      recognition.stop();
+      setIsListening(false);
+    } else {
+      recognition.start();
+    }
+  };
   const handleClick = (event) => {
     event.preventDefault(); // Prevents the default behavior of the anchor tag
     setIsClicked(true);
@@ -51,12 +96,17 @@ const Home = () => {
           <button
             href="#"
             className="icons border rounded-full p-4 mt-4 bg-[#481848]"
-            onClick={handleClick}
+            onClick={toggleListening}
           >
+            {isListening ? "Stop Listening" : "Start Listening"}
             <div>
               <img src={Mic} alt="" style={{ filter: "invert(1)" }} />
             </div>
           </button>
+          {/* <button onClick={sendTranscript} disabled={!transcript}>
+            Send Transcript
+          </button> */}
+          <p>{transcript}</p>
         </div>
       </div>
     </div>
