@@ -8,3 +8,72 @@
     align-items: center;
     margin:7px 10px;
 }
+
+.container{
+    /* From https://css.glass */
+    background: rgba(12, 12, 12, 0.85);
+    border-radius: 16px;
+    height: 80vh;
+    /* width: 100vw; */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5.8px);
+    -webkit-backdrop-filter: blur(5.8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* App.css */
+.carousel-container {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    max-width: 41rem; /* Adjust as needed */
+    height: fit-content;
+    position: relative;
+  }
+  
+  /* Blurred effect */
+  .carousel-container::before,
+  .carousel-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%; /* Adjusted width */
+    background: rgba(255, 255, 255, 0); /* Adjust as needed */
+    backdrop-filter: blur(10px); /* Adjust blur amount as needed */
+    z-index: -1; /* Set z-index to place behind the text content */
+  }
+  
+  .carousel-container::before {
+    left: 0;
+  }
+  
+  .carousel-container::after {
+    right: 0;
+  }
+  
+  .text-carousel {
+    white-space: nowrap;
+    animation: text-carousel 10s linear infinite; /* Adjust animation duration as needed */
+    position: relative;
+    z-index: 2;
+    margin: 0; /* Reset margin */
+  }
+  
+  .text {
+    display: inline-block;
+    padding-right: 20px; /* Adjust as needed to create space between texts */
+  }
+  
+  /* Adjusted border radius for promo */
+  .promo {
+    border-radius: 15px; /* Rounded corners */
+    overflow: hidden; /* Ensure content doesn't overflow rounded corners */
+  }
+  
+  /* Animation keyframes */
+  @keyframes text-carousel {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+  }
+  
