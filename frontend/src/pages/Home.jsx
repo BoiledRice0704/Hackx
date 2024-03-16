@@ -8,11 +8,13 @@ const Home = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState("");
+  const [response, setResponse] = useState("");
+  const synthesis = window.speechSynthesis;
   let recognition;
 
   const toggleListening = () => {
     if (isListening) {
-      console.log('Stopping listening...');
+      console.log("Stopping listening...");
       recognition.stop();
       setIsListening(false);
       sendTranscript();
@@ -67,6 +69,8 @@ const Home = () => {
         console.log(response);
         if (response.ok) {
           console.log("Transcript sent successfully");
+          console.log(response.message);
+          setResponse(response.message);
         } else {
           console.error("Failed to send transcript");
         }
@@ -74,6 +78,10 @@ const Home = () => {
       .catch((error) => {
         console.error("Error sending transcript:", error);
       });
+  };
+  const speak = () => {
+    const utterance = new SpeechSynthesisUtterance(response);
+    synthesis.speak(utterance);
   };
   return (
     <div>

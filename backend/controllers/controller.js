@@ -78,7 +78,7 @@ async function runChat(req, res) {
 
     const msg = req.query.msg;
     if (msg) {
-      const result = await model.generateContentStream(msg);
+      const result = await chat.sendMessage(msg);
       const response = await result.response;
       const text = response.text();
       console.log(text);
@@ -150,32 +150,15 @@ async function runTextParameters(req, res) {
 
 async function audioInputRun(req, res) {
   try {
-    const prompt = req.body.transcript || " ";
+    const prompt = (req.body.transcript || " " ) + "\n Translate the given transcript in English";
     console.log(prompt);
     if (prompt) {
       const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-      const chat = model.startChat({
-        history: [
-          {
-            role: "user",
-            parts:
-              "Can you keep translating given transcripted sentence to english?",
-          },
-          {
-            role: "model",
-            parts: "Okay Understood!",
-          },
-        ],
-        generationConfig: {
-          maxOutputTokens: 100,
-        },
-      });
       if (prompt) {
-        const result = await chat.sendMessage(prompt);
-        const response = result.response;
+        const result = await model.generateContentStream(prompt);
+        const response = await result.response;
         // Log the response to see what it contains
         console.log(response);
-
         // Check if response is valid before accessing its properties
         if (response && response.text) {
           const text = response.text();
