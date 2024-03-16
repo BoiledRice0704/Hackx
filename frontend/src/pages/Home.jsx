@@ -7,7 +7,6 @@ import Mic from "../assets/microphone.png";
 
 const Home = () => {
   const [isClicked, setIsClicked] = useState(false);
-
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState("");
   const recognition = new window.webkitSpeechRecognition(); // Using webkitSpeechRecognition for Chrome compatibility
@@ -27,7 +26,7 @@ const Home = () => {
     let finalTranscript = "";
 
     for (let i = event.resultIndex; i < event.results.length; i++) {
-      const transcript = event.results[i][0].transcript;
+      setTranscript(event.results[i][0].transcript);
       console.log(transcript);
       if (event.results[i].isFinal) {
         finalTranscript += transcript + " ";
@@ -36,7 +35,6 @@ const Home = () => {
         interimTranscript += transcript;
       }
     }
-
     setTranscript(finalTranscript);
   };
 
@@ -49,16 +47,30 @@ const Home = () => {
     if (isListening) {
       recognition.stop();
       setIsListening(false);
+      sendTranscript;
     } else {
       recognition.start();
     }
   };
-  const handleClick = (event) => {
-    event.preventDefault(); // Prevents the default behavior of the anchor tag
-    setIsClicked(true);
-    setTimeout(() => {
-      setIsClicked(false);
-    }, 6000); // Reset isClicked state after 2 seconds (adjust as needed)
+  const sendTranscript = () => {
+    // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint
+    fetch('http://localhost:8080/api/audio_prompt', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ transcript: transcript }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log('Transcript sent successfully');
+        } else {
+          console.error('Failed to send transcript');
+        }
+      })
+      .catch((error) => {
+        console.error('Error sending transcript:', error);
+      });
   };
   return (
     <div>
