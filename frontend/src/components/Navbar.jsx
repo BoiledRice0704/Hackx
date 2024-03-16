@@ -10,7 +10,7 @@ const Navbar = () => {
         <div className="middle flex h-fit items-center justify-center bg-[#2C2C2C] rounded-[61px] ml-[19rem]">
             <div className="icons flex">
                 <a href="/home" className='icon-container flex'><img src={homeIcon}></img></a>
-                <a href="" className='icon-container flex'><img src={homeIcon}></img></a>
+                <a href="/learn-lang" className='icon-container flex'><img src={homeIcon}></img></a>
                 <a href="#" className='icon-container flex'><img src={homeIcon}></img></a>
                 <a href="#" className='icon-container flex'><img src={homeIcon}></img></a>
             </div>
