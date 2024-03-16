@@ -9,7 +9,7 @@ const Home = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState("");
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   const synthesis = window.speechSynthesis;
   let recognition;
 
@@ -20,6 +20,7 @@ const Home = () => {
       setIsListening(false);
       sendTranscript();
     } else {
+      setTranscript("");
       recognition = new window.webkitSpeechRecognition();
       recognition.interimResults = true;
       recognition.lang = "en-US";
@@ -58,35 +59,28 @@ const Home = () => {
       recognition.start();
     }
   };
-  const sendTranscript = () => {
-    fetch("http://localhost:8001/api/audio_input", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ transcript: transcript }),
-    })
-    .then((response) => {
-      // Check if the response is successful
+  const sendTranscript = async () => {
+    try {
+      const response = await fetch("http://localhost:8001/api/translate_input_to_english", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ transcript: transcript }),
+      });
       if (response.ok) {
-          // Parse the JSON response
-          return response.json();
+        const data = await response.json();
+        console.log("Transcript sent successfully");
+        console.log(data);
+        setText(data.message);
+        speak();
       } else {
-          throw new Error("Failed to send transcript");
+        throw new Error("Failed to send transcript");
       }
-  })
-  .then((data) => {
-      console.log("Transcript sent successfully");
-      // Access the JSON data and do something with it
-      console.log(data);
-      setText(data.message);
-      speak();
-  })
-  .catch((error) => {
-      // Catch any errors that occurred during the fetch request
-      console.error("Error sending transcript:", error);
-  });
-  };
+    } catch (err) {
+      console.error("Error sending transcript:", err);
+    }
+  }
   const speak = () => {
     const utterance = new SpeechSynthesisUtterance(text);
     synthesis.speak(utterance);

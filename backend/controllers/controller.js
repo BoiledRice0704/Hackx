@@ -148,7 +148,7 @@ async function runTextParameters(req, res) {
   }
 }
 
-async function audioInputRun(req, res) {
+async function audioInputToEnglish(req, res) {
   try {
     let prompt = req.body.transcript || "";
     
@@ -184,12 +184,74 @@ async function audioInputRun(req, res) {
   }
 }
 
+async function audioInputToHindi(req, res) {
+  try {
+    const prompt = ( req.body.transcript || " " ) + "Translate the given transcript to Hindi";
+    console.log(prompt);
+    if (prompt) {
+      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+      if (prompt) {
+        const result = await model.generateContentStream(prompt);
+        const response = await result.response;
+        // Log the response to see what it contains
+        console.log(response);
 
+        // Check if response is valid before accessing its properties
+        if (response && response.text) {
+          const text = response.text();
+          res.status(200).json({ message: text });
+          console.log(text);
+        } else {
+          res.status(500).json({ error: "Invalid response" });
+          console.log("Invalid response");
+        }
+      }
+    } else {
+      res.status(400).json({ error: "No prompt provided" });
+    }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+    console.log(err);
+  }
+}
+
+async function audioInputToSpanish(req, res) {
+  try {
+    const prompt = ( req.body.transcript || " " ) + "Translate the given transcript to Spanish";
+    console.log(prompt);
+    if (prompt) {
+      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+      if (prompt) {
+        const result = await model.generateContentStream(prompt);
+        const response = await result.response;
+        // Log the response to see what it contains
+        console.log(response);
+
+        // Check if response is valid before accessing its properties
+        if (response && response.text) {
+          const text = response.text();
+          res.status(200).json({ message: text });
+          console.log(text);
+        } else {
+          res.status(500).json({ error: "Invalid response" });
+          console.log("Invalid response");
+        }
+      }
+    } else {
+      res.status(400).json({ error: "No prompt provided" });
+    }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+    console.log(err);
+  }
+}
 module.exports = {
   run,
   runMultiModal,
   runChat,
   runEmbedding,
   runTextParameters,
-  audioInputRun,
+  audioInputToEnglish,
+  audioInputToHindi,
+  audioInputToSpanish
 };
