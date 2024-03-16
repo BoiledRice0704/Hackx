@@ -148,16 +148,44 @@ async function runTextParameters(req, res) {
   }
 }
 
-async function audioInputRun(req, res){
+async function audioInputRun(req, res) {
   try {
     const prompt = req.body.transcript || " ";
+    console.log(prompt);
     if (prompt) {
       const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-      const result = await model.generateContentStream(prompt);
-      const response = await result.response;
-      const text = response.text();
-      res.status(200).json({ message: text });
-      console.log(text);
+      const chat = model.startChat({
+        history: [
+          {
+            role: "user",
+            parts:
+              "Can you keep translating given transcripted sentence to english?",
+          },
+          {
+            role: "model",
+            parts: "Okay Understood!",
+          },
+        ],
+        generationConfig: {
+          maxOutputTokens: 100,
+        },
+      });
+      if (prompt) {
+        const result = await chat.sendMessage(prompt);
+        const response = result.response;
+        // Log the response to see what it contains
+        console.log(response);
+
+        // Check if response is valid before accessing its properties
+        if (response && response.text) {
+          const text = response.text();
+          res.status(200).json({ message: text });
+          console.log(text);
+        } else {
+          res.status(500).json({ error: "Invalid response" });
+          console.log("Invalid response");
+        }
+      }
     } else {
       res.status(400).json({ error: "No prompt provided" });
     }
@@ -166,13 +194,11 @@ async function audioInputRun(req, res){
     console.log(err);
   }
 }
-
-
 module.exports = {
   run,
   runMultiModal,
   runChat,
   runEmbedding,
   runTextParameters,
-  audioInputRun
+  audioInputRun,
 };
