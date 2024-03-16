@@ -1,0 +1,34 @@
+.background{
+
+    background: rgba(63, 4, 104, 0.15);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    border: 1px solid rgba(63, 4, 104, 0.3);
+}
+
+.animate-gradient-text {
+	max-width: min-content;
+}
+
+.animate-gradient-text {
+	background-image: linear-gradient(120deg, #fcf8ff, #40046a, #f2ecff);
+	background-size: 200%;
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+	background-clip: text;
+	animation: animated-gradient 5s ease-in-out infinite;
+}
+
+/* Простенька Keyframe анімація */
+@keyframes animated-gradient {
+	0%,
+	100% {
+		background-position: 0 50%;
+	}
+
+	50% {
+		background-position: 100% 50%;
+	}
+}

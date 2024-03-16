@@ -17,7 +17,11 @@ export default {
           6: '#8BD67D',
           6: '#d6e6fa',
         },
-      }
+        
+      },
+      fontFamily: {
+        'asap': ['"Asap Condensed"'],
+      },
     },
   },
   plugins: [],

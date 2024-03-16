@@ -21,7 +21,7 @@ const Carousel = ({ images }) => {
   }, [currentIndex]);
 
   return (
-    <div className="relative w-80 h-80">
+    <div className="relative w-80 h-80  max-lg:w-60 max-lg:h-60">
       {images.map((image, index) => (
         <div
           key={index}

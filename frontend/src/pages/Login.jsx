@@ -56,9 +56,9 @@ const Login = () => {
 
 
   return (
-    <div className="w-full h-[100vh] bg-primary-1 flex items-center">
-      <div className="w-[65%] h-[90%] mx-auto rounded-2xl flex">
-        <div className="flex flex-col w-[50%] bg-primary-2 rounded-l-2xl p-5 text-center">
+    <div className="w-full min-h-[100vh] py-10 bg-primary-1 flex items-center">
+      <div className="w-[65%] max-sm:flex-col h-[90%] mx-auto rounded-2xl flex max-md:w-[85%]">
+        <div className="flex flex-col w-[50%]  bg-primary-2 rounded-l-2xl p-5 text-center max-sm:w-[80%] max-sm:rounded-2xl max-sm:rounded-b-none mx-auto">
           <motion.div
             className="flex justify-center items-center mt-20"
             drag
@@ -74,14 +74,14 @@ const Login = () => {
             <Carousel images={images} />
           </motion.div>
           <motion.div className="" initial={{ y: -100 }} animate={{ y: 0 }}>
-            <span className="text-3xl  text-white my-5 block">
+            <span className="text-3xl  text-white my-5 block  max-lg:text-2xl">
               Blockchain website
             </span>
-            <span className="text-2xl text-white my-3 w-3/4 mx-auto font-light">
+            <span className="text-2xl text-white my-3 w-3/4 mx-auto font-light max-lg:text-xl">
               Unlocking the Future: Empowering Possibilities with Blockchain
               Innovation
             </span>
-            <div className="dots flex justify-center mt-5">
+            <div className="dots flex justify-center mt-5 mb-10">
               {images.map((_, index) => (
                 <svg
                   key={index}
@@ -99,7 +99,7 @@ const Login = () => {
           </motion.div>
         </div>
 
-        <div className="w-1/2 rounded-r-lg bg-primary-6 flex flex-col justify-center p-5">
+        <div className="w-1/2 rounded-r-lg bg-primary-6 flex flex-col justify-center p-5 max-sm:w-[80%] max-sm:rounded-2xl max-sm:rounded-t-none mx-auto">
           <h1 className="mx-auto my-10 text-4xl">BlockChain Website</h1>
           <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
             <input
@@ -139,7 +139,7 @@ const Login = () => {
             <img src={googleLogo} alt="" className="w-8 inline-block" />
             Sign In with Google
           </button>
-          <span className="mt-4 mx-auto">
+          <span className="mt-4 mx-auto text-center" >
             Are you new? <Link className="underline">Create an account</Link>
           </span>
         </div>
