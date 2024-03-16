@@ -9,7 +9,7 @@ const Home = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState("");
-  const [index, setIndex] = useState(0);
+  const [selectedLanguage, setSelectedLanguage] = useState(0);
   const [text, setText] = useState("");
   const handleChange = (event) => {
     setSelectedLanguage(event.target.value);
@@ -66,7 +66,7 @@ const Home = () => {
   const sendTranscript = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8001/api/translate_input_to_${index}`,
+        `http://localhost:8001/api/translate_input_to_${selectedLanguage}`,
         {
           method: "POST",
           headers: {
