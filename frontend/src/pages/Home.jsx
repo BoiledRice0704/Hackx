@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import "../App.css";
 import Mic from "../assets/microphone.png";
+import Stop from "../assets/stop-button.png"
 
 const Home = () => {
   const [isClicked, setIsClicked] = useState(false);
@@ -21,6 +22,7 @@ const Home = () => {
       console.log("Stopping listening...");
       recognition.stop();
       setIsListening(false);
+      sendTranscript();
     } else {
       setTranscript("");
       recognition = new window.webkitSpeechRecognition();
@@ -108,10 +110,10 @@ const Home = () => {
           </div>
 
           <div className="heading mt-4">
-            <h1 className="animate-gradient-text">
+            <h1 className="animate-gradient-text text-5xl">
               AI Voice Trainer <br />
             </h1>
-            <h1 className="animate-gradient-text">
+            <h1 className="animate-gradient-text text-5xl">
               for Any Commercial Product
             </h1>
           </div>
@@ -128,9 +130,9 @@ const Home = () => {
             className="icons border rounded-full p-4 mt-4 bg-[#481848]"
             onClick={toggleListening}
           >
-            {isListening ? "Stop Listening" : "Start Listening"}
+            {isListening ? <img src={Stop} alt="" style={{ filter: "invert(1)" }} /> : <img src={Mic} alt="" style={{ filter: "invert(1)" }} />}
             <div>
-              <img src={Mic} alt="" style={{ filter: "invert(1)" }} />
+              {/* <img src={Mic} alt="" style={{ filter: "invert(1)" }} /> */}
             </div>
           </button>
           {/* <button onClick={sendTranscript} disabled={!transcript}>
