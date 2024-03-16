@@ -1,14 +1,42 @@
-const express = require('express');
+// index.js
+const express = require("express");
+require("dotenv").config();
+const cors = require("cors");
+const corsOptions = {
+  origin: "http://127.0.0.1:5173", // Change this to your client URL
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
 const app = express();
-require('dotenv').config();
-const connectDatabase = require('./config/db');
+const port = process.env.PORT || 4000;
+const controller = require("./controllers/controller.js");
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
+app.get("/api/prompt", (req, res) => {
+  controller.run(req, res);
 });
 
-connectDatabase()
+app.get("/api/image_text_prompt", (req, res) => {
+  controller.runMultiModal(req, res);
+});
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+app.get("/api/chat_prompt", (req, res) => {
+  controller.runChat(req, res);
+});
+
+app.get("/api/embedding_prompt", (req, res) => {
+  controller.runEmbedding(req, res);
+});
+
+app.get("/api/model_parameters_prompt", (req, res) => {
+  controller.runTextParameters(req, res);
+});
+
+app.post("/api/audio_input", (req, res) => {
+  controller.audioInputRun(req, res);
+});
+
+app.listen(port, () => {
+  console.log(`Server is running on ${port}`);
 });
