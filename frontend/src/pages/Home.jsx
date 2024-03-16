@@ -108,10 +108,10 @@ const Home = () => {
           </div>
 
           <div className="heading mt-4">
-            <h1 className="animate-gradient-text">
+            <h1 className="animate-gradient-text text-5xl">
               AI Voice Trainer <br />
             </h1>
-            <h1 className="animate-gradient-text">
+            <h1 className="animate-gradient-text text-5xl">
               for Any Commercial Product
             </h1>
           </div>
@@ -128,7 +128,6 @@ const Home = () => {
             className="icons border rounded-full p-4 mt-4 bg-[#481848]"
             onClick={toggleListening}
           >
-            {isListening ? "Stop Listening" : "Start Listening"}
             <div>
               <img src={Mic} alt="" style={{ filter: "invert(1)" }} />
             </div>
