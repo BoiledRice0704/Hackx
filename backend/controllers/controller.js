@@ -153,6 +153,22 @@ async function audioInputRun(req, res){
     const prompt = req.body.transcript || " ";
     if (prompt) {
       const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+      const chat = model.startChat({
+        history: [
+          {
+            role: "user",
+            parts:
+              "Can you keep translating given transcripted sentence to english?",
+          },
+          {
+            role: "model",
+            parts: "Okay Understood!",
+          },
+        ],
+        generationConfig: {
+          maxOutputTokens: 100,
+        },
+      });
       const result = await model.generateContentStream(prompt);
       const response = await result.response;
       const text = response.text();

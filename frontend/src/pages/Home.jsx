@@ -1,6 +1,5 @@
 // Home.js
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import "../App.css";
 import Mic from "../assets/microphone.png";
@@ -9,67 +8,70 @@ const Home = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState("");
-  const recognition = new window.webkitSpeechRecognition(); // Using webkitSpeechRecognition for Chrome compatibility
-
-  recognition.continuous = true;
-  recognition.interimResults = true;
-  recognition.lang = "en-US";
-
-  recognition.onstart = () => {
-    setIsListening(true);
-    console.log("Speech recognition started");
-  };
-
-  recognition.onresult = (event) => {
-    console.log('Entered onresult');
-    let interimTranscript = "";
-    let finalTranscript = "";
-
-    for (let i = event.resultIndex; i < event.results.length; i++) {
-      setTranscript(event.results[i][0].transcript);
-      console.log(transcript);
-      if (event.results[i].isFinal) {
-        finalTranscript += transcript + " ";
-        console.log(finalTranscript);
-      } else {
-        interimTranscript += transcript;
-      }
-    }
-    setTranscript(finalTranscript);
-  };
-
-  recognition.onerror = (event) => {
-    console.error("Speech recognition error:", event.error);
-    setIsListening(false);
-  };
+  let recognition;
 
   const toggleListening = () => {
     if (isListening) {
       recognition.stop();
       setIsListening(false);
-      sendTranscript;
+      sendTranscript();
     } else {
+      recognition = new window.webkitSpeechRecognition();
+      recognition.interimResults = true;
+      recognition.lang = "en-US";
+
+      recognition.onstart = () => {
+        setIsListening(true);
+        console.log("Speech recognition started");
+      };
+
+      recognition.onresult = (event) => {
+        let interimTranscript = "";
+        let finalTranscript = "";
+
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          setTranscript(event.results[i][0].transcript);
+          if (event.results[i].isFinal) {
+            finalTranscript += event.results[i][0].transcript + " ";
+          } else {
+            interimTranscript += event.results[i][0].transcript;
+          }
+        }
+        setTranscript(finalTranscript);
+      };
+
+      recognition.onerror = (event) => {
+        console.error("Speech recognition error:", event.error);
+        setIsListening(false);
+      };
+
+      recognition.onend = () => {
+        setIsListening(false);
+        console.log("Speech recognition ended");
+      };
+
       recognition.start();
     }
   };
+
   const sendTranscript = () => {
     // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint
-    fetch('http://localhost:8080/api/audio_prompt', {
-      method: 'POST',
+    fetch("http://localhost:8080/api/audio_prompt", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ transcript: transcript }),
     })
       .then((response) => {
         if (response.ok) {
-          console.log('Transcript sent successfully');
+          console.log("Transcript sent successfully");
         } else {
-          console.error('Failed to send transcript');
+          console.error("Failed to send transcript");
         }
       })
       .catch((error) => {
-        console.error('Error sending transcript:', error);
+        console.error("Error sending transcript:", error);
       });
   };
   return (
