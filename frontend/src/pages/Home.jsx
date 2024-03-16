@@ -22,7 +22,7 @@ const Home = () => {
       console.log("Stopping listening...");
       recognition.stop();
       setIsListening(false);
-      sendTranscript();
+      sendTranscript(selectedLanguage);
     } else {
       setTranscript("");
       recognition = new window.webkitSpeechRecognition();
@@ -63,7 +63,7 @@ const Home = () => {
       recognition.start();
     }
   };
-  const sendTranscript = async () => {
+  const sendTranscript = async (selectedLanguage) => {
     try {
       const response = await fetch(
         `http://localhost:8001/api/translate_input_to_${selectedLanguage}`,
