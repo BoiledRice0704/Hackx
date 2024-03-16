@@ -13,11 +13,11 @@ const Home = () => {
   let recognition;
 
   const toggleListening = () => {
+    setTranscript('');
     if (isListening) {
       console.log("Stopping listening...");
       recognition.stop();
       setIsListening(false);
-      sendTranscript();
     } else {
       recognition = new window.webkitSpeechRecognition();
       recognition.interimResults = true;
