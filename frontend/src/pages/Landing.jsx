@@ -43,13 +43,13 @@ const Landing = () => {
           ref={parallaxRef}
         >
           <Parallax pages={1.6}>
-            <ParallaxLayer offset={0} speed={0.1}>
+            <ParallaxLayer offset={0} speed={0.4}>
                 <div className="flex flex-col w-full h-full justify-around items-center">
               <motion.div
                 className="text-white font-light text-center w-fit "
                 style={{
-                  fontSize: `${Math.max(1.65, 3 - scrollPosition / 75)}rem`,
-                  opacity: `${100 - scrollPosition / 1.2}%`,
+                  fontSize: `${Math.max(1.65, 3.5 - scrollPosition / 75)}rem`,
+                  opacity: `${100 - scrollPosition / 1.5}%`,
                   
                 }}
                 initial={{ y: -100 }}
@@ -68,7 +68,7 @@ const Landing = () => {
                 animate={{ y: 0 }}
                 transition={{ delay: 0.1 }}
                 style={{
-                    fontSize: `${Math.max(1.35, 2.5 + (200-scrollPosition) / 75)}rem`,
+                    fontSize: `${Math.max(1.35, 2.5 + (220-scrollPosition) / 75)}rem`,
                     opacity: `${(300 - scrollPosition) / 1.2}%`,
                     
                   }}    
