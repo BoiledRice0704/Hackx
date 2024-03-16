@@ -150,29 +150,13 @@ async function runTextParameters(req, res) {
 
 async function audioInputRun(req, res) {
   try {
-    const prompt = req.body.transcript || " ";
+    const prompt = ( req.body.transcript || " " ) + "Translate the given transcript to English";
     console.log(prompt);
     if (prompt) {
       const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-      const chat = model.startChat({
-        history: [
-          {
-            role: "user",
-            parts:
-              "Can you keep translating given transcripted sentence to english?",
-          },
-          {
-            role: "model",
-            parts: "Okay Understood!",
-          },
-        ],
-        generationConfig: {
-          maxOutputTokens: 100,
-        },
-      });
       if (prompt) {
-        const result = await chat.sendMessage(prompt);
-        const response = result.response;
+        const result = await model.generateContentStream(prompt);
+        const response = await result.response;
         // Log the response to see what it contains
         console.log(response);
 
