@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom'
 
 const Navbar = () => {
   return (
-    <div className='nav flex p-3 justify-center'>
+    <div className='nav flex p-2 justify-center'>
         <div className="flex w-1/2 justify-center">
             <div className="flex justify-center">
                 <a href="/home" className='p-1'><img src={homeIcon} style={{filter:"invert(1)",width:"30px"}}></img></a>

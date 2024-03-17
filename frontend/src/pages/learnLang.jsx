@@ -109,18 +109,21 @@ const LearnLang = () => {
     <div>
       <Navbar />
       <div className=" flex flex-col">
-        <div className="upp flex justify-between">
-          <div className="big-heading text-white text-9xl m-16 ">
+
+        <div className="flex justify-between w-3/4 mx-auto">
+
+          <div className="big-heading text-white text-8xl max-lg:text-7xl  ">
             <h1 className="gradient-text">Learning</h1>
             <h1 className="gradient-text">{lang ? lang : "..."}</h1>
           </div>
+
           <div className="dropdown">
             <label htmlFor="language" className="text-white text-2xl">
               Select Language:{" "}
             </label>
             <select
               id="language"
-              className="rounded-2xl mt-[3rem] mr-[3rem] pl-14 pr-14 text-gray-600"
+              className="rounded-2xl  pl-14 pr-14 text-gray-600"
               value={lang}
               onChange={handleChange}
             >
@@ -129,15 +132,16 @@ const LearnLang = () => {
               <option value="Spanish">Spanish</option>
             </select>
           </div>
+
         </div>
 
-        <div className="learning mt-24 ml-7">
-          <div className="ai flex h-10 justify-evenly">
-            <div className="inp bg-white rounded-2xl flex items-center justify-between w-[80%]">
+        <div className="bottom-0 absolute w-full">
+          <div className="ai flex h-10 justify-center">
+            <div className="inp bg-white rounded-2xl mr-2 flex items-center justify-between w-[75%]">
               <input
                 type="text"
                 placeholder="Enter your text here"
-                className="ml-2"
+                className="ml-4 w-full "
                 value={userInput}
                 onChange={(e) => setUserInput(e.target.value)}
               />
@@ -151,7 +155,7 @@ const LearnLang = () => {
               </div>
             </div>
             <div className="low flex justify-center text-white text-2xl">
-              <div className="btns w-fit border p-3 pr-14 pl-14 rounded-2xl cursor-pointer flex">
+              <div className="btns w-fit border p-3  rounded-2xl cursor-pointer flex">
                 <button className="flex items-center justify-between">
                   Start Now
                 </button>

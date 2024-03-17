@@ -33,7 +33,7 @@ app.post("/authenticate", async (req, res) => {
     );
     return res.status(response.status).json(response.data);
   } catch (error) {
-    console.error(error);
+    console.error(error.response.data);
     return res.status(500).json({ error: "Internal server error" });
   }
 });

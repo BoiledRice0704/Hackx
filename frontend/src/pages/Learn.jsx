@@ -105,7 +105,7 @@ const Learn = () => {
               <input
                 type="text"
                 placeholder="Enter your text here"
-                className="ml-2"
+                className="ml-2 "
                 value={userInput}
                 onChange={(e) => setUserInput(e.target.value)}
               />

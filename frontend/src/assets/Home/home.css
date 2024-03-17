@@ -81,3 +81,7 @@ border: 1px solid rgba(214, 230, 250, 0.23);
 .dropdown select:focus {
   border-color: #888;
 }
+
+input:focus-visible{
+  outline: none;
+}
