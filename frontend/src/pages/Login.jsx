@@ -1,22 +1,27 @@
 import React, { useState } from "react";
-import Carousel from "../components/Carousel";
-import { Link } from "react-router-dom";
+import axios from 'axios';
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate hook
 import { motion } from "framer-motion";
-import {doSignInWithEmailAndPassword,doSignInWithGoogle} from '../firebase/auth'
-import { useSelector } from "react-redux";
-import {useAuth} from '../contexts/authContext'
+import { doSignInWithEmailAndPassword, doSignInWithGoogle } from '../firebase/auth';
+import { useSelector, useDispatch } from "react-redux";
+import { useAuth } from '../contexts/authContext';
 import googleLogo from "../assets/google.svg";
-const image1 =
-  "https://static.vecteezy.com/system/resources/previews/010/842/688/original/3d-illustration-ethereum-blockchain-png.png";
+import { setUser } from "../slices/generalSlice";
+import Carousel from "../components/Carousel";
+
+const image1 = "https://static.vecteezy.com/system/resources/previews/010/842/688/original/3d-illustration-ethereum-blockchain-png.png";
 const image2 = "https://cdn-icons-png.flaticon.com/512/8757/8757988.png";
 const image3 = "https://cdn-icons-png.flaticon.com/512/2091/2091665.png";
 
 const images = [image1, image2, image3];
-const Login = () => {
-  const {userLoggedIn} = useAuth()
-  const [isSigningIn, setIsSigningIn] = useState(false)
-  const currentIndex = useSelector((state) => state.counter.index);
 
+const Login = (props) => {
+  const { userLoggedIn } = useAuth();
+  const [isSigningIn, setIsSigningIn] = useState(false);
+  const currentIndex = useSelector((state) => state.counter.index);
+  const user = useSelector((state) => state.counter.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate(); // Initialize useNavigate hook
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -28,8 +33,7 @@ const Login = () => {
 
   const handleChange = (e) => {
     const { name, value, type, files, checked } = e.target;
-    const newValue =
-      type === "file" ? files[0] : type === "checkbox" ? checked : value;
+    const newValue = type === "file" ? files[0] : type === "checkbox" ? checked : value;
 
     setFormData({
       ...formData,
@@ -37,23 +41,34 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // You can handle form submission logic here
+
+    const value = formData.email;
+    
+    try {
+      const response = await axios.post('http://localhost:8001/authenticate', { username: value });
+      dispatch(setUser({ ...response.data, secret: value }));
+      console.log(response.data.username);
+
+      // Navigate to '/chat' after successful authentication
+      navigate('/chat');
+    } catch (error) {
+      console.error('error', error);
+    }
+
     console.log(formData);
   };
 
   const onGoogleSignIn = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (!isSigningIn) {
-        setIsSigningIn(true)
-        doSignInWithGoogle().catch(err => {
-            setIsSigningIn(false)
-        })
+      setIsSigningIn(true);
+      doSignInWithGoogle().catch(err => {
+        setIsSigningIn(false);
+      });
     }
-}
-
-
+  };
 
   return (
     <div className="w-full min-h-[100vh] py-10 bg-primary-1 flex items-center">
