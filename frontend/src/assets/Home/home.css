@@ -86,6 +86,10 @@ body {
   border-color: #888;
 }
 
+input:focus-visible{
+  outline: none;
+}
+
 .heading {
   margin-left: 5vw;
   display: flex;
