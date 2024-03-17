@@ -113,11 +113,11 @@ const Home = () => {
           </div>
 
           <div className="heading mt-4">
-            <h1 className="animate-gradient-text">
-              Multilingual Support <br />
+            <h1 className="animate-gradient-text text-5xl">
+                  Multilingual <br />
             </h1>
-            <h1 className="animate-gradient-text -mt-12">
-              Speech to Speech
+            <h1 className="animate-gradient-text text-5xl">
+               anything to anything solution.
             </h1>
           </div>
         </div>

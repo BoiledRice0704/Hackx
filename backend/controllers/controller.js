@@ -302,15 +302,12 @@ async function learnLang(req, res) {
     let prompt = req.body.transcript || " ";
     console.log(prompt);
 
-    // Remove all characters apart from letters and spaces
-    prompt = prompt.replace(/[^a-zA-Z\s]/g, '');
-    prompt = prompt.replace(/[\[\(].*?[\]\)]/g, '');
     if (prompt) {
       const model = genAI.getGenerativeModel({ model: "gemini-pro" });
       if (prompt) {
         const result = await model.generateContentStream(
           prompt + ((promptCount <= 1) ?
-            `\nHelp me learn ${lang},`
+            `\nI want to learn ${lang},`
             : ` `)
         );
         promptCount++;
@@ -320,7 +317,7 @@ async function learnLang(req, res) {
 
         // Check if response is valid before accessing its properties
         if (response && response.text) {
-          const text = response.text();
+          const text = response.text().replace(/[^a-zA-Z\s]/g, '').replace(/[\[\(].*?[\]\)]/g, '');
           res.status(200).json({ message: text });
           console.log(text);
         } else {
