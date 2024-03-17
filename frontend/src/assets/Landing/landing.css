@@ -55,11 +55,11 @@
   }
   @keyframes glowing {
     from {
-      -webkit-filter: drop-shadow(0 0 40px rgb(0, 8, 255));
+      -webkit-filter: drop-shadow(0 0 40px rgb(255, 255, 255));
     }
   
     to {
-      -webkit-filter: drop-shadow(0 0 15px rgb(1, 60, 255));
+      -webkit-filter: drop-shadow(0 0 15px rgb(255, 255, 255));
     }
   }
 
@@ -85,6 +85,25 @@
   .ringy img {
 	width: 100%;
   }
+  .line2 {
+	width:0;
+	margin-top:100px;
+	background:rgb(254, 0, 0);
+	background-color: red;
+	transform:rotate(-45deg);
+	transform-origin:left;
+  }
+  .line3 {
+	width:0;
+	margin-top:100px;
+	background:rgb(254, 0, 0);
+	background-color: red;
+	transform:rotate(135deg);
+	transform-origin:left;
+  }
+  
+  
+
   
 
   

@@ -129,6 +129,7 @@ const Landing = () => {
           <span className="mr-2">Scroll down</span>
           <img src={down} alt="" className="w-12 transition" />
         </div>}
+        <div className="line2 relative" style={{width:`${scrollPosition}px`, top:"110px",height:"5px"}}></div>
       </div>
     </div>
   );
