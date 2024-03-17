@@ -8,18 +8,48 @@ const Learn = () => {
   const [lang, setLang] = useState(""); // Default language set to English
   const [userInput, setUserInput] = useState(""); // User input
   const [messages, setMessages] = useState([]); // Array to store messages
-
+  const [text, setText] = useState([]);
   const handleChange = (e) => {
     setLang(e.target.value);
+    localStorage.setItem({"selectedLanguage": e.target.value });
   };
 
-  const handleSubmit = () => {
+  const handleSubmitText = () => {
     // Send user input to the API and get response
+    async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8001/api/translate_input_to_${localStorage.getItem('selectedLanguage')}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ transcript: userInput }),
+          }
+        );
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Transcript sent successfully");
+          console.log(data);
+          setText(...data.message);
+          speak();
+        } else {
+          throw new Error("Failed to send transcript");
+        }
+      } catch (err) {
+        console.error("Error sending transcript:", err);
+      }
+    };
     // Here, you would typically make an API call to your backend or external AI service
     // For demonstration purpose, let's just echo the user's message for now
-    setMessages([...messages, { text: userInput, sender: "user" }]);
-    setUserInput(""); // Clear user input after sending
+    // setMessages([...messages, { text: userInput, sender: "user" }]);
+    // setUserInput(""); // Clear user input after sending
   };
+
+  const handleSubmitAudio = () => {
+
+  }
 
   useEffect(() => {
     // Here, you would typically fetch messages from an API
@@ -74,17 +104,17 @@ const Learn = () => {
                 onChange={(e) => setUserInput(e.target.value)}
               />
               <div className="chatbtns w-fit flex justify-end pr-3">
-                <button onClick={handleSubmit}>
+                <button onClick={handleSubmitAudio}>
                   <img src={Mic} alt="" width="17px" />
                 </button>
-                <button onClick={handleSubmit}>
+                <button onClick={handleSubmitText}>
                   <img src={sendBtn} alt="" width="17px" />
                 </button>
               </div>
             </div>
           </div>
           <div className="learner">
-            {messages.map((message, index) => (
+            {text.map((message, index) => (
               <div key={index} className={message.sender === "user" ? "user-message" : "ai-message"}>
                 {message.text}
               </div>

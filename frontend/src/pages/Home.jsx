@@ -57,7 +57,7 @@ const Home = () => {
       recognition.onend = () => {
         setIsListening(false);
         console.log("Speech recognition ended");
-        sendTranscript();
+        sendTranscript(selectedLanguage);
       };
 
       recognition.start();

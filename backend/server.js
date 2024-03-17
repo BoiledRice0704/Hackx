@@ -51,6 +51,10 @@ app.post("/api/translate_input_to_spanish", (req, res) => {
 app.post("/api/translate_input_to_many", (req, res)=>{
   controller.audioInputToMany(req, res);
 });
+//learn
+app.post("/api/learn_lang", (req, res)=>{
+  controller.learnLang(req, res);
+});
 // Chat
 const CHAT_ENGINE_PROJECT_ID = "287e0b40-982f-429b-a7f8-cde946157404";
 const CHAT_ENGINE_PRIVATE_KEY = "cf560a94-3ab2-454a-bf04-6569016be9e9";
@@ -67,8 +71,6 @@ app.post("/authenticate",async(req,res)=>{
     console.log(e)
   }
 })
-// Chat
-
 app.listen(port, () => {
   console.log(`Server is running on ${port}`);
 });
