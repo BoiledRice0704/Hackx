@@ -4,9 +4,7 @@ import Login from "./pages/Login";
 import { AuthProvider } from "./contexts/authContext";
 import Landing from "./pages/Landing";
 import Home from "./pages/Home";
-import Learn from "./pages/Learn";
 import LearnLang from "./pages/learnLang";
-import bG from "./assets/bg.gif";
 import ChatsPage from "./pages/ChatsPage";
 const App = () => {
   return (

@@ -296,26 +296,28 @@ async function audioInputToMany(req, res) {
 }
 
 async function learnLang(req, res) {
+  let promptCount = 0;
   try {
     const lang = req.body.lang;
-    const prompt = req.body.transcript || " ";
+    let prompt = req.body.transcript || " ";
     console.log(prompt);
+
     if (prompt) {
       const model = genAI.getGenerativeModel({ model: "gemini-pro" });
       if (prompt) {
         const result = await model.generateContentStream(
-          prompt +
-            "\n please reply in " +
-            req.body.lang +
-            " but keep the characters in english just the words in hindi"
+          prompt + ((promptCount <= 1) ?
+            `\nI want to learn ${lang},`
+            : ` `)
         );
+        promptCount++;
         const response = await result.response;
         // Log the response to see what it contains
         console.log(response);
 
         // Check if response is valid before accessing its properties
         if (response && response.text) {
-          const text = response.text();
+          const text = response.text().replace(/[^a-zA-Z\s]/g, '').replace(/[\[\(].*?[\]\)]/g, '');
           res.status(200).json({ message: text });
           console.log(text);
         } else {
@@ -331,6 +333,7 @@ async function learnLang(req, res) {
     console.log(err);
   }
 }
+
 
 module.exports = {
   run,

@@ -55,6 +55,7 @@ const LearnLang = () => {
   };
 
   const toggleRecording = () => {
+    console.log(isRecording);
     if (!isRecording) {
       if (recognition) {
         recognition.start();
@@ -101,7 +102,6 @@ const LearnLang = () => {
   const speak = (text) => {
     const speech = new SpeechSynthesisUtterance(text);
     speech.lang = lang;
-    window.speechSynthesis.cancel();
     window.speechSynthesis.speak(speech);
   };
 
@@ -146,10 +146,10 @@ const LearnLang = () => {
                 onChange={(e) => setUserInput(e.target.value)}
               />
               <div className="chatbtns w-fit flex justify-end pr-3">
-                <button onClick={toggleRecording}>
+                <button onClick={toggleRecording} className="mic">
                   <img src={Mic} alt="" width="17px" />
                 </button>
-                <button onClick={handleSubmitText}>
+                <button onClick={handleSubmitText} className="text">
                   <img src={sendBtn} alt="" width="17px" />
                 </button>
               </div>
@@ -162,7 +162,7 @@ const LearnLang = () => {
               </div>
             </div>
           </div>
-          <div className="learner text-white container p-5 text-center my-3 text-3xl mx-auto">
+          <div className="learner text-white p-5 text-center my-3 text-3xl">
             {messages.map((message, index) => (
               <div
                 key={index}
