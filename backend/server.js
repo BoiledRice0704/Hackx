@@ -45,6 +45,10 @@ app.post("/api/translate_input_to_spanish", (req, res) => {
   controller.audioInputToSpanish(req, res);
 });
 
+app.post("/api/translate_input_to_many", (req, res)=>{
+  controller.audioInputToMany(req, res);
+});
+
 app.listen(port, () => {
   console.log(`Server is running on ${port}`);
 });

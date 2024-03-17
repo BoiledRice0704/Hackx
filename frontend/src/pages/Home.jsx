@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import "../App.css";
 import Mic from "../assets/microphone.png";
-import Stop from "../assets/stop-button.png"
+import Stop from "../assets/stop-button.png";
 
 const Home = () => {
   const [isClicked, setIsClicked] = useState(false);
@@ -130,7 +130,11 @@ const Home = () => {
             className="icons border rounded-full p-4 mt-4 bg-[#481848]"
             onClick={toggleListening}
           >
-            {isListening ? <img src={Stop} alt="" style={{ filter: "invert(1)" }} /> : <img src={Mic} alt="" style={{ filter: "invert(1)" }} />}
+            {isListening ? (
+              <img src={Stop} alt="" style={{ filter: "invert(1)" }} />
+            ) : (
+              <img src={Mic} alt="" style={{ filter: "invert(1)" }} />
+            )}
             <div>
               {/* <img src={Mic} alt="" style={{ filter: "invert(1)" }} /> */}
             </div>
