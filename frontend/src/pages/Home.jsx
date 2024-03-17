@@ -10,7 +10,6 @@ const Home = () => {
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState('english');
-  const [text, setText] = useState("");
   const handleChange = (e) => {
     console.log(e.target.value);
     localStorage.setItem("selectedLanguage", e.target.value);
@@ -82,9 +81,8 @@ const Home = () => {
       if (response.ok) {
         const data = await response.json();
         console.log("Transcript sent successfully");
-        console.log(data);
-        setText(data.message);
-        speak();
+        console.log(data.message);
+        speak(data.message);
       } else {
         throw new Error("Failed to send transcript");
       }
@@ -92,7 +90,8 @@ const Home = () => {
       console.error("Error sending transcript:", err);
     }
   };
-  const speak = () => {
+  function speak(text){
+    console.log(text);
     const utterance = new SpeechSynthesisUtterance(text);
     synthesis.speak(utterance);
   };
