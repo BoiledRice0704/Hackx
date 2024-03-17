@@ -1,11 +1,13 @@
 import React, { useRef, useEffect, useState } from "react";
-import bg from "../assets/Landing/bg.jpeg";
+import bg from "../assets/Landing/boby_ball.gif";
 import "../assets/Landing/landing.css";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import down from "../assets/Landing/down.svg";
-import ring from "../assets/Landing/ring.png"
+import ring from "../assets/Landing/ring.png";
+
+
 const Landing = () => {
   const parallaxRef = useRef(null);
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -13,7 +15,7 @@ const Landing = () => {
   useEffect(() => {
     const handleScroll = () => {
       if (parallaxRef.current) {
-        const parallaxDiv = parallaxRef.current.children[0]; // assuming the div is the first child
+        const parallaxDiv = parallaxRef.current.children[0];
         if (parallaxDiv) {
           const position = parallaxDiv.scrollTop;
           setScrollPosition(position);
@@ -38,9 +40,24 @@ const Landing = () => {
       className="min-h-[100vh] bg-cover font-asap"
       style={{ backgroundImage: `url(${bg})`, backgroundPosition: "center" }}
     >     
-      <div className="background w-full min-h-[100vh] relative">
+      <div className="background w-full min-h-[100vh] relative overflow-hidden">
+        <div className="relative snowfall w-[80%] p-5 mx-auto">
+          {/* Generate multiple rings */}
+          {[...Array(10)].map((_, index) => (
+            <div
+              key={index}
+              className="ringy"
+              style={{
+                left: `${Math.random() * 80}vw`, // random horizontal position
+                animationDuration: `${Math.random() * 5 + 2}s`, // random falling speed
+              }}
+            >
+              <img src={ring} alt="Ring" className=""/>
+            </div>
+          ))}
+        </div>
         <div
-          className="parallax h-[85vh] absolute w-full top-[5rem]"
+          className="parallax h-[100vh] absolute w-full top-[5rem]"
           ref={parallaxRef}
         >
           <Parallax pages={1.6}>

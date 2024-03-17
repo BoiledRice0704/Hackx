@@ -1,30 +1,13 @@
-body{
-  background: url("E:\projects\Hackx\frontend\src\assets\bg.gif");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: top left;
-  background-attachment: fixed;
+
+.login-container{
+  background: rgba(255, 255, 255, 0.1);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(1px);
+--webkit-backdrop-filter: blur(20px);
+border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.icon-container{
-    border-radius: 50%;
-    /* background: #A7A7A7; */
-    width: 2.5rem;
-    height: 2.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin:7px 10px;
-}
-
-.container{
-    /* From https://css.glass */
-    background: rgba(12, 12, 12, 0.142);
-    border-radius: 16px;
-    height: 41rem;
-    /* width: 100vw; */
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
 
 /* App.css */
 .carousel-container {
@@ -57,30 +40,8 @@ body{
     right: 0;
   }
   
-  .text-carousel {
-    white-space: nowrap;
-    animation: text-carousel 10s linear infinite; /* Adjust animation duration as needed */
-    position: relative;
-    z-index: 2;
-    margin: 0; /* Reset margin */
-  }
+ 
   
-  .text {
-    display: inline-block;
-    padding-right: 20px; /* Adjust as needed to create space between texts */
-  }
-  
-  /* Adjusted border radius for promo */
-  .promo {
-    border-radius: 15px; /* Rounded corners */
-    overflow: hidden; /* Ensure content doesn't overflow rounded corners */
-  }
-  
-  /* Animation keyframes */
-  @keyframes text-carousel {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
-  }
   
 
   .animate-gradient-text {
