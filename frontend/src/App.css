@@ -1,6 +1,14 @@
+body{
+  background: url("E:\projects\Hackx\frontend\src\assets\bg.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top left;
+  background-attachment: fixed;
+}
+
 .icon-container{
     border-radius: 50%;
-    background: #A7A7A7;
+    /* background: #A7A7A7; */
     width: 2.5rem;
     height: 2.5rem;
     display: flex;
@@ -11,13 +19,10 @@
 
 .container{
     /* From https://css.glass */
-    background: rgba(12, 12, 12, 0.85);
+    background: rgba(12, 12, 12, 0.142);
     border-radius: 16px;
-    height: 85rem;
+    height: 41rem;
     /* width: 100vw; */
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5.8px);
-    -webkit-backdrop-filter: blur(5.8px);
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
