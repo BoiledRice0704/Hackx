@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import "./style/learn.css";
 import sendBtn from "../assets/send.png";
@@ -90,7 +90,12 @@ const Learn = () => {
         </div>
         <div className="low flex justify-center text-white text-2xl">
           <div className="btns w-fit border p-3 pr-14 pl-14 rounded-2xl cursor-pointer flex">
-            <button className="flex items-center justify-between">Start Now</button>
+            <button
+              onClick={scrollToNextPage}
+              className="flex items-center justify-between"
+            >
+              Start Now
+            </button>
           </div>
         </div>
         <div className="learning mt-24 ml-7">

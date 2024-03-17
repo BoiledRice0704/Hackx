@@ -127,8 +127,9 @@ const Home = () => {
           </div>
           <button
             href="#"
-            className="icons border rounded-full p-4 mt-4 bg-[#481848]"
+            className="icons border rounded-full p-4 mt-4 bg-transparent"
             onClick={toggleListening}
+            style={{border:"2px solid white"}}
           >
             {isListening ? (
               <img src={Stop} alt="" style={{ filter: "invert(1)" }} />
@@ -142,32 +143,35 @@ const Home = () => {
           {/* <button onClick={sendTranscript} disabled={!transcript}>
             Send Transcript
           </button> */}
-          <div>
-            <h2>Select your preferred language:</h2>
-            <label>
+          <div className="text-white">
+            <h2 className="text-center">Select your preferred language:</h2>
+            <label className="ml-2 mr-2">
               <input
                 type="radio"
                 value="english"
                 checked={selectedLanguage === "english"}
                 onChange={handleChange}
+                className="ml-2 mr-2"
               />
               English
             </label>
-            <label>
+            <label className="ml-2 mr-2">
               <input
                 type="radio"
                 value="hindi"
                 checked={selectedLanguage === "hindi"}
                 onChange={handleChange}
+                className="ml-2 mr-2"
               />
               Hindi
             </label>
-            <label>
+            <label className="ml-2 mr-2">
               <input
                 type="radio"
                 value="spanish"
                 checked={selectedLanguage === "spanish"}
                 onChange={handleChange}
+                className="ml-2 mr-2"
               />
               Spanish
             </label>
