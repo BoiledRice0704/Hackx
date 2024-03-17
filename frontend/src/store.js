@@ -4,6 +4,5 @@ import generalSlice from './slices/generalSlice'
 export const store = configureStore({
   reducer: {
     counter: generalSlice,
-
   },
-});
+})
