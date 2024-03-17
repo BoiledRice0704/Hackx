@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import "../assets/Home/home.css";
+import "../pages/style/learnLang.css";
 import sendBtn from "../assets/send.png";
 import Mic from "../assets/microphone.png";
 
@@ -110,20 +111,20 @@ const LearnLang = () => {
       <Navbar />
       <div className=" flex flex-col">
 
-        <div className="flex justify-between w-3/4 mx-auto">
+        <div className="flex justify-between w-[85%] max-md:w-[90%]  mx-auto">
 
           <div className="big-heading text-white text-8xl max-lg:text-7xl  ">
-            <h1 className="gradient-text">Learning</h1>
-            <h1 className="gradient-text">{lang ? lang : "..."}</h1>
+            <h1 className="gradient-text max-md:text-6xl">Learning</h1>
+            <h1 className="gradient-text max-md:text-6xl">{lang ? lang : "..."}</h1>
           </div>
 
           <div className="dropdown">
-            <label htmlFor="language" className="text-white text-2xl">
+            <label htmlFor="language" className="text-white text-2xl max-md:text-xl">
               Select Language:{" "}
             </label>
             <select
               id="language"
-              className="rounded-2xl  pl-14 pr-14 text-gray-600"
+              className="rounded-2xl  pl-14 pr-14 text-gray-600 max-md:block mx-auto max-md:mt-2"
               value={lang}
               onChange={handleChange}
             >
@@ -136,7 +137,7 @@ const LearnLang = () => {
         </div>
 
         <div className="bottom-0 absolute w-full">
-          <div className="ai flex h-10 justify-center">
+          <div className="ai flex max-md:h-12 justify-center">
             <div className="inp bg-white rounded-2xl mr-2 flex items-center justify-between w-[75%]">
               <input
                 type="text"
@@ -145,18 +146,18 @@ const LearnLang = () => {
                 value={userInput}
                 onChange={(e) => setUserInput(e.target.value)}
               />
-              <div className="chatbtns w-fit flex justify-end pr-3">
-                <button onClick={toggleRecording} className="mic">
+              <div className="chatbtns w-fit flex justify-end pr-3 max-md:w-24">
+                <button onClick={toggleRecording} className="mic max-md:w-12">
                   <img src={Mic} alt="" width="17px" />
                 </button>
-                <button onClick={handleSubmitText} className="text">
+                <button onClick={handleSubmitText} className="text max-md:w-12">
                   <img src={sendBtn} alt="" width="17px" />
                 </button>
               </div>
             </div>
             <div className="low flex justify-center text-white text-2xl">
-              <div className="btns w-fit border p-3  rounded-2xl cursor-pointer flex">
-                <button className="flex items-center justify-between">
+              <div className="btns w-fit border p-3 rounded-2xl cursor-pointer flex">
+                <button className="flex items-center justify-between max-md:text-xl">
                   Start Now
                 </button>
               </div>
