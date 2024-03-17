@@ -4,7 +4,7 @@ import "../assets/Landing/landing.css";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-
+import down from "../assets/Landing/down.svg";
 const Landing = () => {
   const parallaxRef = useRef(null);
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -44,21 +44,20 @@ const Landing = () => {
         >
           <Parallax pages={1.6}>
             <ParallaxLayer offset={0} speed={0.4}>
-                <div className="flex flex-col w-full h-full justify-around items-center">
-              <motion.div
-                className="text-white font-light text-center w-fit "
-                style={{
-                  fontSize: `${Math.max(1.65, 3.5 - scrollPosition / 75)}rem`,
-                  opacity: `${100 - scrollPosition / 1.5}%`,
-                  
-                }}
-                initial={{ y: -100 }}
-                animate={{ y: 0 }}
-                transition={{ delay: 0.1 }}
-              >
-                Communicate without any <br />
-                language barrier!
-              </motion.div>
+              <div className="flex flex-col w-full h-full justify-around items-center">
+                <motion.div
+                  className="text-white font-light text-center w-fit "
+                  style={{
+                    fontSize: `${Math.max(1.65, 3.5 - scrollPosition / 75)}rem`,
+                    opacity: `${100 - scrollPosition / 1.5}%`,
+                  }}
+                  initial={{ y: -100 }}
+                  animate={{ y: 0 }}
+                  transition={{ delay: 0.1 }}
+                >
+                  Communicate without any <br />
+                  language barrier!
+                </motion.div>
               </div>
             </ParallaxLayer>
             <ParallaxLayer offset={0.5} speed={1}>
@@ -68,12 +67,15 @@ const Landing = () => {
                 animate={{ y: 0 }}
                 transition={{ delay: 0.1 }}
                 style={{
-                    fontSize: `${Math.max(1.35, 2.5 + (220-scrollPosition) / 75)}rem`,
-                    opacity: `${(300 - scrollPosition) / 1.2}%`,
-                    
-                  }}    
+                  fontSize: `${Math.max(
+                    1.35,
+                    2.5 + (220 - scrollPosition) / 75
+                  )}rem`,
+                  opacity: `${(300 - scrollPosition) / 1.2}%`,
+                }}
               >
-                Virtual Meetings, Real Connections:<br/> Break Language Barriers Effortlessly
+                Virtual Meetings, Real Connections:
+                <br /> Break Language Barriers Effortlessly
               </motion.h1>
             </ParallaxLayer>
             <ParallaxLayer offset={0.8} speed={1}>
@@ -82,16 +84,16 @@ const Landing = () => {
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
                 transition={{ delay: 0.1 }}
-                style={{
+                style={
+                  {
                     // fontSize: `${Math.max(1.35, 2 + (400-scrollPosition) / 75)}rem`,
-                    
-                    
-                  }}    
+                  }
+                }
               >
-                Chat Across Cultures:<br/> Instant Translation for Seamless Conversations
+                Chat Across Cultures:
+                <br /> Instant Translation for Seamless Conversations
               </motion.h1>
             </ParallaxLayer>
-            
           </Parallax>
         </div>
         <nav className="w-full flex justify-between p-5 fixed top-0">
@@ -102,6 +104,10 @@ const Landing = () => {
             </Link>
           </div>
         </nav>
+       {scrollPosition<5 && <div className="absolute bottom-5 right-5 text-white flex flex-col items-center justify-center animate-bounce">
+          <span className="mr-2">Scroll down</span>
+          <img src={down} alt="" className="w-12 transition" />
+        </div>}
       </div>
     </div>
   );
