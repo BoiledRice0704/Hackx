@@ -12,6 +12,7 @@ const Learn = () => {
   const handleChange = (e) => {
     setLang(e.target.value);
     localStorage.setItem({"selectedLanguage": e.target.value });
+    console.log(selectedLanguage)
   };
 
   const handleSubmitText = () => {
