@@ -151,17 +151,20 @@ async function runTextParameters(req, res) {
 async function audioInputToEnglish(req, res) {
   try {
     let prompt = req.body.transcript || "";
-    
+
     // Check if there is any transcript
     if (prompt.trim() !== "") {
       // Combine all the speaker's lines
-      prompt = prompt.split("\n").map(line => line.trim()).join(" ");
-      
+      prompt = prompt
+        .split("\n")
+        .map((line) => line.trim())
+        .join(" ");
+
       // Add instruction for translation
       prompt += " Translate the conversation to English";
-      
+
       console.log(prompt);
-      
+
       const model = await genAI.getGenerativeModel({ model: "gemini-pro" });
       const result = await model.generateContentStream(prompt);
       const response = await result.response;
@@ -186,7 +189,8 @@ async function audioInputToEnglish(req, res) {
 
 async function audioInputToHindi(req, res) {
   try {
-    const prompt = ( req.body.transcript || " " ) + "Translate the given transcript to Hindi";
+    const prompt =
+      (req.body.transcript || " ") + "Translate the given transcript to Hindi";
     console.log(prompt);
     if (prompt) {
       const model = genAI.getGenerativeModel({ model: "gemini-pro" });
@@ -217,7 +221,9 @@ async function audioInputToHindi(req, res) {
 
 async function audioInputToSpanish(req, res) {
   try {
-    const prompt = ( req.body.transcript || " " ) + "Translate the given transcript to Spanish";
+    const prompt =
+      (req.body.transcript || " ") +
+      "Translate the given transcript to Spanish";
     console.log(prompt);
     if (prompt) {
       const model = genAI.getGenerativeModel({ model: "gemini-pro" });
@@ -246,11 +252,12 @@ async function audioInputToSpanish(req, res) {
   }
 }
 
-
 async function audioInputToMany(req, res) {
   try {
     const lang = req.body.lang;
-    const prompt = ( req.body.transcript || " " ) + `Translate the given transcript to ${lang}`;
+    const prompt =
+      (req.body.transcript || " ") +
+      `Translate the given transcript to ${lang}`;
     console.log(prompt);
     if (prompt) {
       const model = genAI.getGenerativeModel({ model: "gemini-pro" });
@@ -282,12 +289,17 @@ async function audioInputToMany(req, res) {
 async function learnLang(req, res) {
   try {
     const lang = req.body.lang;
-    const prompt = ( req.body.transcript || " " );
+    const prompt = req.body.transcript || " ";
     console.log(prompt);
     if (prompt) {
       const model = genAI.getGenerativeModel({ model: "gemini-pro" });
       if (prompt) {
-        const result = await model.generateContentStream(prompt);
+        const result = await model.generateContentStream(
+          prompt +
+            "\n please reply in " +
+            req.body.lang +
+            " but keep the characters in english just the words in hindi"
+        );
         const response = await result.response;
         // Log the response to see what it contains
         console.log(response);
@@ -321,5 +333,5 @@ module.exports = {
   audioInputToHindi,
   audioInputToSpanish,
   audioInputToMany,
-  learnLang
+  learnLang,
 };
