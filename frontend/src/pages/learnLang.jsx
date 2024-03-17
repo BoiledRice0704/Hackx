@@ -162,7 +162,7 @@ const LearnLang = () => {
               </div>
             </div>
           </div>
-          <div className="learner text-white p-5 text-center my-3 text-3xl">
+          <div className="learner text-white p-5 mx-auto w-[85%] text-center my-3 text-3xl">
             {messages.map((message, index) => (
               <div
                 key={index}
