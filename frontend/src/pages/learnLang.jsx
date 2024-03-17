@@ -55,6 +55,7 @@ const LearnLang = () => {
   };
 
   const toggleRecording = () => {
+    console.log(isRecording);
     if (!isRecording) {
       if (recognition) {
         recognition.start();
@@ -101,7 +102,6 @@ const LearnLang = () => {
   const speak = (text) => {
     const speech = new SpeechSynthesisUtterance(text);
     speech.lang = lang;
-    window.speechSynthesis.cancel();
     window.speechSynthesis.speak(speech);
   };
 
@@ -133,32 +133,26 @@ const LearnLang = () => {
 
         <div className="learning mt-24 ml-7">
           <div className="ai flex h-10 justify-evenly">
-            <div className="inp bg-white rounded-2xl flex items-center justify-between w-[80%]">
+            <div className="inp bg-white rounded-2xl flex items-center justify-between w-[80%] inputParent">
               <input
                 type="text"
                 placeholder="Enter your text here"
-                className="ml-2"
+                className="ml-2 inputLearn"
                 value={userInput}
                 onChange={(e) => setUserInput(e.target.value)}
               />
               <div className="chatbtns w-fit flex justify-end pr-3">
-                <button onClick={toggleRecording}>
+                <button onClick={toggleRecording} className="mic">
                   <img src={Mic} alt="" width="17px" />
                 </button>
-                <button onClick={handleSubmitText}>
+                <button onClick={handleSubmitText} className="text">
                   <img src={sendBtn} alt="" width="17px" />
                 </button>
               </div>
             </div>
-            <div className="low flex justify-center text-white text-2xl">
-              <div className="btns w-fit border p-3 pr-14 pl-14 rounded-2xl cursor-pointer flex">
-                <button className="flex items-center justify-between">
-                  Start Now
-                </button>
-              </div>
-            </div>
+            <div className="low flex justify-center text-white text-2xl"></div>
           </div>
-          <div className="learner text-white container p-5 text-center my-3 text-3xl mx-auto">
+          <div className="learner text-white p-5 text-center my-3 text-3xl">
             {messages.map((message, index) => (
               <div
                 key={index}
