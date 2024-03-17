@@ -24,13 +24,13 @@ const LearnLang = () => {
   const handleSubmitText = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8001/api/translate_input_to_${localStorage.getItem('selectedLanguage')}`,
+        `http://localhost:8001/api/learn_lang`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ transcript: userInput }),
+          body: JSON.stringify({ transcript: userInput, lang: localStorage.getItem('selectedLanguage') }),
         }
       );
       if (response.ok) {

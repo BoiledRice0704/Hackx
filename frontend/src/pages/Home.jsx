@@ -9,10 +9,11 @@ const Home = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState("");
-  const [selectedLanguage, setSelectedLanguage] = useState(0);
-  const [text, setText] = useState("");
-  const handleChange = (event) => {
-    setSelectedLanguage(event.target.value);
+  const [selectedLanguage, setSelectedLanguage] = useState('english');
+  const handleChange = (e) => {
+    console.log(e.target.value);
+    localStorage.setItem("selectedLanguage", e.target.value);
+    setSelectedLanguage(e.target.value);
   };
   const synthesis = window.speechSynthesis;
   let recognition;
@@ -22,7 +23,6 @@ const Home = () => {
       console.log("Stopping listening...");
       recognition.stop();
       setIsListening(false);
-      sendTranscript(selectedLanguage);
     } else {
       setTranscript("");
       recognition = new window.webkitSpeechRecognition();
@@ -46,7 +46,7 @@ const Home = () => {
             interimTranscript += event.results[i][0].transcript;
           }
         }
-        setTranscript(finalTranscript);
+        setTranscript(finalTranscript); // Set final transcript instead of empty string
       };
 
       recognition.onerror = (event) => {
@@ -57,13 +57,16 @@ const Home = () => {
       recognition.onend = () => {
         setIsListening(false);
         console.log("Speech recognition ended");
+        // Ensure selectedLanguage is retrieved from state
         sendTranscript(selectedLanguage);
       };
+      
 
       recognition.start();
     }
   };
   const sendTranscript = async (selectedLanguage) => {
+    console.log(selectedLanguage); // Ensure selectedLanguage is not null
     try {
       const response = await fetch(
         `http://localhost:8001/api/translate_input_to_${selectedLanguage}`,
@@ -78,9 +81,8 @@ const Home = () => {
       if (response.ok) {
         const data = await response.json();
         console.log("Transcript sent successfully");
-        console.log(data);
-        setText(data.message);
-        speak();
+        console.log(data.message);
+        speak(data.message);
       } else {
         throw new Error("Failed to send transcript");
       }
@@ -88,7 +90,8 @@ const Home = () => {
       console.error("Error sending transcript:", err);
     }
   };
-  const speak = () => {
+  function speak(text){
+    console.log(text);
     const utterance = new SpeechSynthesisUtterance(text);
     synthesis.speak(utterance);
   };
@@ -131,11 +134,7 @@ const Home = () => {
             onClick={toggleListening}
             style={{border:"2px solid white"}}
           >
-            {isListening ? (
-              <img src={Stop} alt="" style={{ filter: "invert(1)" }} />
-            ) : (
-              <img src={Mic} alt="" style={{ filter: "invert(1)" }} />
-            )}
+            {isListening ? <img src={Stop} alt="" style={{ filter: "invert(1)" }} /> : <img src={Mic} alt="" style={{ filter: "invert(1)" }} />}
             <div>
               {/* <img src={Mic} alt="" style={{ filter: "invert(1)" }} /> */}
             </div>
@@ -150,7 +149,7 @@ const Home = () => {
                 type="radio"
                 value="english"
                 checked={selectedLanguage === "english"}
-                onChange={handleChange}
+                onChange={(e)=>{handleChange(e)}}
                 className="ml-2 mr-2"
               />
               English
@@ -160,7 +159,7 @@ const Home = () => {
                 type="radio"
                 value="hindi"
                 checked={selectedLanguage === "hindi"}
-                onChange={handleChange}
+                onChange={(e)=>{handleChange(e)}}
                 className="ml-2 mr-2"
               />
               Hindi
@@ -170,7 +169,7 @@ const Home = () => {
                 type="radio"
                 value="spanish"
                 checked={selectedLanguage === "spanish"}
-                onChange={handleChange}
+                onChange={(e)=>{handleChange(e)}}
                 className="ml-2 mr-2"
               />
               Spanish
