@@ -57,7 +57,7 @@ const Home = () => {
       recognition.onend = () => {
         setIsListening(false);
         console.log("Speech recognition ended");
-        sendTranscript();
+        sendTranscript(selectedLanguage);
       };
 
       recognition.start();
@@ -131,7 +131,11 @@ const Home = () => {
             onClick={toggleListening}
             style={{border:"2px solid white"}}
           >
-            {isListening ? <img src={Stop} alt="" style={{ filter: "invert(1)" }} /> : <img src={Mic} alt="" style={{ filter: "invert(1)" }} />}
+            {isListening ? (
+              <img src={Stop} alt="" style={{ filter: "invert(1)" }} />
+            ) : (
+              <img src={Mic} alt="" style={{ filter: "invert(1)" }} />
+            )}
             <div>
               {/* <img src={Mic} alt="" style={{ filter: "invert(1)" }} /> */}
             </div>
