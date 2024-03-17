@@ -5,6 +5,7 @@ import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import down from "../assets/Landing/down.svg";
+import ring from "../assets/Landing/ring.png"
 const Landing = () => {
   const parallaxRef = useRef(null);
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -36,7 +37,7 @@ const Landing = () => {
     <div
       className="min-h-[100vh] bg-cover font-asap"
       style={{ backgroundImage: `url(${bg})`, backgroundPosition: "center" }}
-    >
+    >     
       <div className="background w-full min-h-[100vh] relative">
         <div
           className="parallax h-[85vh] absolute w-full top-[5rem]"
@@ -45,6 +46,7 @@ const Landing = () => {
           <Parallax pages={1.6}>
             <ParallaxLayer offset={0} speed={0.4}>
               <div className="flex flex-col w-full h-full justify-around items-center">
+                
                 <motion.div
                   className="text-white font-light text-center w-fit "
                   style={{
@@ -56,12 +58,13 @@ const Landing = () => {
                   transition={{ delay: 0.1 }}
                 >
                   Communicate without any <br />
-                  language barrier!
+                  language <span className="font-extralight glowing">barrier!</span>
                 </motion.div>
               </div>
             </ParallaxLayer>
             <ParallaxLayer offset={0.5} speed={1}>
-              <motion.h1
+              
+              <motion.h2
                 className="text-white top-[50%] absolute mx-auto w-full text-5xl font-light text-center "
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
@@ -74,9 +77,10 @@ const Landing = () => {
                   opacity: `${(300 - scrollPosition) / 1.2}%`,
                 }}
               >
-                Virtual Meetings, Real Connections:
+                Virtual Meetings, Real <span className="glowing ">Connections:</span>
                 <br /> Break Language Barriers Effortlessly
-              </motion.h1>
+              </motion.h2>
+              
             </ParallaxLayer>
             <ParallaxLayer offset={0.8} speed={1}>
               <motion.h1
