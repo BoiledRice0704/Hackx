@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
-import "./style/learnLang.css";
+import "../assets/Home/home.css";
 import sendBtn from "../assets/send.png";
 import Mic from "../assets/microphone.png";
 
@@ -23,23 +23,27 @@ const LearnLang = () => {
 
   const handleSubmitText = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:8001/api/learn_lang`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ transcript: userInput, lang: localStorage.getItem('selectedLanguage') }),
-        }
-      );
+      const response = await fetch(`http://localhost:8001/api/learn_lang`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          transcript: userInput,
+          lang: localStorage.getItem("selectedLanguage"),
+        }),
+      });
       if (response.ok) {
         const data = await response.json();
         console.log("Transcript sent successfully");
         console.log(data);
-        const newText = {text:data.message,sender:'ai'};
-        setMessages([...messages, { text: userInput, sender: "user" }, newText]);
-        console.log({messages}) // Merge new AI replies with existing messages
+        const newText = { text: data.message, sender: "ai" };
+        setMessages([
+          ...messages,
+          { text: userInput, sender: "user" },
+          newText,
+        ]);
+        console.log({ messages }); // Merge new AI replies with existing messages
         setUserInput(""); // Clear user input after sending
         speak(data.message); // Call speak function for the new AI message
       } else {
@@ -65,7 +69,7 @@ const LearnLang = () => {
   };
 
   useEffect(() => {
-    if (window.hasOwnProperty('webkitSpeechRecognition')) {
+    if (window.hasOwnProperty("webkitSpeechRecognition")) {
       const recognitionInstance = new window.webkitSpeechRecognition();
 
       recognitionInstance.continuous = true;
@@ -74,17 +78,17 @@ const LearnLang = () => {
       recognitionInstance.lang = lang;
 
       recognitionInstance.onresult = (e) => {
-        setUserInput((prevText) => prevText + e.results[0][0].transcript + ' ');
+        setUserInput((prevText) => prevText + e.results[0][0].transcript + " ");
         recognitionInstance.stop();
       };
 
       recognitionInstance.onerror = (e) => {
-        console.log('error', e);
+        console.log("error", e);
         recognitionInstance.stop();
       };
 
       recognitionInstance.onend = (e) => {
-        console.log('ended', e);
+        console.log("ended", e);
         if (isRecording) {
           recognitionInstance.start();
         }
@@ -104,14 +108,14 @@ const LearnLang = () => {
   return (
     <div>
       <Navbar />
-      <div className="container flex flex-col">
+      <div className=" flex flex-col">
         <div className="upp flex justify-between">
-          <div className="big-heading text-white text-9xl m-32 ">
+          <div className="big-heading text-white text-9xl m-16 ">
             <h1 className="gradient-text">Learning</h1>
             <h1 className="gradient-text">{lang ? lang : "..."}</h1>
           </div>
           <div className="dropdown">
-            <label htmlFor="language" className="text-white">
+            <label htmlFor="language" className="text-white text-2xl">
               Select Language:{" "}
             </label>
             <select
@@ -126,14 +130,10 @@ const LearnLang = () => {
             </select>
           </div>
         </div>
-        <div className="low flex justify-center text-white text-2xl">
-          <div className="btns w-fit border p-3 pr-14 pl-14 rounded-2xl cursor-pointer flex">
-            <button className="flex items-center justify-between">Start Now</button>
-          </div>
-        </div>
+
         <div className="learning mt-24 ml-7">
-          <div className="ai flex h-10 ">
-            <div className="inp bg-white w-[35rem] rounded-2xl flex items-center justify-between">
+          <div className="ai flex h-10 justify-evenly">
+            <div className="inp bg-white rounded-2xl flex items-center justify-between w-[80%]">
               <input
                 type="text"
                 placeholder="Enter your text here"
@@ -150,10 +150,22 @@ const LearnLang = () => {
                 </button>
               </div>
             </div>
+            <div className="low flex justify-center text-white text-2xl">
+              <div className="btns w-fit border p-3 pr-14 pl-14 rounded-2xl cursor-pointer flex">
+                <button className="flex items-center justify-between">
+                  Start Now
+                </button>
+              </div>
+            </div>
           </div>
-          <div className="learner">
+          <div className="learner text-white container p-5 text-center my-3 text-3xl mx-auto">
             {messages.map((message, index) => (
-              <div key={index} className={message.sender === "user" ? "user-message" : "ai-message"}>
+              <div
+                key={index}
+                className={
+                  message.sender === "user" ? "user-message" : "ai-message"
+                }
+              >
                 {message.text}
               </div>
             ))}

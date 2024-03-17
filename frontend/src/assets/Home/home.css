@@ -54,3 +54,30 @@ border: 1px solid rgba(214, 230, 250, 0.23);
 .icons a img{
     width: 30px;
 }
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown label {
+  color: white;
+}
+
+.dropdown select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: transparent;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #666;
+  cursor: pointer;
+  outline: none;
+}
+
+.dropdown select:hover,
+.dropdown select:focus {
+  border-color: #888;
+}
