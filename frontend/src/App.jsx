@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom"; // Import from 'react-router-dom' instead of 'react'
 import Login from "./pages/Login";
 import { AuthProvider } from "./contexts/authContext";
 import Landing from "./pages/Landing";
 import Home from "./pages/Home";
 import Learn from "./pages/Learn";
+import ChatsPage from "./pages/ChatsPage";
 const App = () => {
   return (
     <>
@@ -13,11 +14,12 @@ const App = () => {
           <Route path="/home" element={<Home/>} />
           <Route path="/" element={<Landing />} />
           <Route path="/learn-lang" element={<Learn />} />
+          <Route path="/chat" element={<ChatsPage />} />
           <Route
             path="/login"
             element={
               <AuthProvider>
-                <Login />
+                <Login/>
               </AuthProvider>
             }
           />
