@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import axios from 'axios';
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate hook
+import { Link} from "react-router-dom"; // Import useNavigate hook
 import { motion } from "framer-motion";
 import { doSignInWithEmailAndPassword, doSignInWithGoogle } from '../firebase/auth';
-import { useSelector, useDispatch } from "react-redux";
 import { useAuth } from '../contexts/authContext';
 import googleLogo from "../assets/google.svg";
-import { setUser } from "../slices/generalSlice";
 import Carousel from "../components/Carousel";
 import bg from '../assets/bg.gif'
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom/dist/umd/react-router-dom.development";
 
 const image1 = "https://static.vecteezy.com/system/resources/previews/010/842/688/original/3d-illustration-ethereum-blockchain-png.png";
 const image2 = "https://cdn-icons-png.flaticon.com/512/8757/8757988.png";

@@ -62,22 +62,23 @@ app.post("/api/translate_input_to_many", (req, res)=>{
 app.post("/api/learn_lang", (req, res)=>{
   controller.learnLang(req, res);
 });
-// Chat
-const CHAT_ENGINE_PROJECT_ID = "287e0b40-982f-429b-a7f8-cde946157404";
-const CHAT_ENGINE_PRIVATE_KEY = "cf560a94-3ab2-454a-bf04-6569016be9e9";
+
 app.post("/authenticate",async(req,res)=>{
   const {username} =req.body;
   try {
     const r=await axios.put(
       'https://api.chatengine.io/users/',
       {username:username,secret:username,first_name:username},
-      {headers:{"private-key":"cf560a94-3ab2-454a-bf04-6569016be9e9"}}
+      {headers:{"private-key":"81d89857-b446-4503-8cb6-f6cd5f51de93"}}
     );
     return res.status(r.status).json(r.data)
   } catch (e) {
     console.log(e)
   }
 })
+// Chat
+
+
 app.listen(port, () => {
   console.log(`Server is running on ${port}`);
 });
