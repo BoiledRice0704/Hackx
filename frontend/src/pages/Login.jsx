@@ -31,6 +31,7 @@ const Login = (props) => {
     phoneNumber: "",
     userIcon: null,
   });
+  const tagline = ["Learn, Converse, Connect: Speak Any Language, Anywhere!","Chat Across Cultures: Instant Translation for Seamless Conversations","Language Learning, Simplified Communication: Your Multilingual Toolbox"]
 
   const handleChange = (e) => {
     const { name, value, type, files, checked } = e.target;
@@ -91,11 +92,10 @@ const Login = (props) => {
           </motion.div>
           <motion.div className="" initial={{ y: -100 }} animate={{ y: 0 }}>
             <span className="text-3xl  text-white my-5 block  max-lg:text-2xl">
-              Blockchain website
+              VartaLang
             </span>
-            <span className="text-2xl text-white my-3 w-3/4 mx-auto font-light max-lg:text-xl">
-              Unlocking the Future: Empowering Possibilities with Blockchain
-              Innovation
+            <span className="text-2xl transition-all text-white my-3 w-3/4 mx-auto font-light max-lg:text-xl">
+              {tagline[currentIndex]}
             </span>
             <div className="dots flex justify-center mt-5 mb-10">
               {images.map((_, index) => (
@@ -116,7 +116,7 @@ const Login = (props) => {
         </div>
 
         <div className="w-1/2 rounded-r-lg bg-primary-6 rounded-l-none flex flex-col justify-center p-5 max-sm:w-[80%] max-sm:rounded-2xl max-sm:rounded-t-none mx-auto">
-          <h1 className="mx-auto my-10 text-4xl">BlockChain Website</h1>
+          <h1 className="mx-auto my-10 text-4xl">VartaLang</h1>
           <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
             <input
               type="text"
