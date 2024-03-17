@@ -189,29 +189,34 @@ async function audioInputToEnglish(req, res) {
 
 async function audioInputToHindi(req, res) {
   try {
-    const prompt =
-      (req.body.transcript || " ") + "Translate the given transcript to Hindi";
-    console.log(prompt);
-    if (prompt) {
-      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-      if (prompt) {
-        const result = await model.generateContentStream(prompt);
-        const response = await result.response;
-        // Log the response to see what it contains
-        console.log(response);
+    let prompt = req.body.transcript || "";
+    if (prompt.trim() !== "") {
+      // Combine all the speaker's lines
+      prompt = prompt
+        .split("\n")
+        .map((line) => line.trim())
+        .join(" ");
 
-        // Check if response is valid before accessing its properties
-        if (response && response.text) {
-          const text = response.text();
-          res.status(200).json({ message: text });
-          console.log(text);
-        } else {
-          res.status(500).json({ error: "Invalid response" });
-          console.log("Invalid response");
-        }
+      // Add instruction for translation
+      prompt += " Translate the conversation to Hindi";
+
+      console.log(prompt);
+
+      const model = await genAI.getGenerativeModel({ model: "gemini-pro" });
+      const result = await model.generateContentStream(prompt);
+      const response = await result.response;
+
+      // Check if response is valid before accessing its properties
+      if (response && response.text) {
+        const text = await response.text(); // await here
+        res.status(200).json({ message: text });
+        console.log(text);
+      } else {
+        res.status(500).json({ error: "Invalid response" });
+        console.log("Invalid response");
       }
     } else {
-      res.status(400).json({ error: "No prompt provided" });
+      res.status(400).json({ error: "No transcript provided" });
     }
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -221,30 +226,34 @@ async function audioInputToHindi(req, res) {
 
 async function audioInputToSpanish(req, res) {
   try {
-    const prompt =
-      (req.body.transcript || " ") +
-      "Translate the given transcript to Spanish";
-    console.log(prompt);
-    if (prompt) {
-      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-      if (prompt) {
-        const result = await model.generateContentStream(prompt);
-        const response = await result.response;
-        // Log the response to see what it contains
-        console.log(response);
+    let prompt = req.body.transcript || "";
+    if (prompt.trim() !== "") {
+      // Combine all the speaker's lines
+      prompt = prompt
+        .split("\n")
+        .map((line) => line.trim())
+        .join(" ");
 
-        // Check if response is valid before accessing its properties
-        if (response && response.text) {
-          const text = response.text();
-          res.status(200).json({ message: text });
-          console.log(text);
-        } else {
-          res.status(500).json({ error: "Invalid response" });
-          console.log("Invalid response");
-        }
+      // Add instruction for translation
+      prompt += " Translate the conversation to Spanish";
+
+      console.log(prompt);
+
+      const model = await genAI.getGenerativeModel({ model: "gemini-pro" });
+      const result = await model.generateContentStream(prompt);
+      const response = await result.response;
+
+      // Check if response is valid before accessing its properties
+      if (response && response.text) {
+        const text = await response.text(); // await here
+        res.status(200).json({ message: text });
+        console.log(text);
+      } else {
+        res.status(500).json({ error: "Invalid response" });
+        console.log("Invalid response");
       }
     } else {
-      res.status(400).json({ error: "No prompt provided" });
+      res.status(400).json({ error: "No transcript provided" });
     }
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -256,8 +265,8 @@ async function audioInputToMany(req, res) {
   try {
     const lang = req.body.lang;
     const prompt =
-      (req.body.transcript || " ") +
-      `Translate the given transcript to ${lang}`;
+      " '"(req.body.transcript || " ") +
+      `' Translate the given transcript to ${lang}`;
     console.log(prompt);
     if (prompt) {
       const model = genAI.getGenerativeModel({ model: "gemini-pro" });

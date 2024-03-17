@@ -8,6 +8,7 @@ import { useAuth } from '../contexts/authContext';
 import googleLogo from "../assets/google.svg";
 import { setUser } from "../slices/generalSlice";
 import Carousel from "../components/Carousel";
+import bg from '../assets/bg.gif'
 
 const image1 = "https://static.vecteezy.com/system/resources/previews/010/842/688/original/3d-illustration-ethereum-blockchain-png.png";
 const image2 = "https://cdn-icons-png.flaticon.com/512/8757/8757988.png";
@@ -52,7 +53,7 @@ const Login = (props) => {
       console.log(response.data.username);
 
       // Navigate to '/chat' after successful authentication
-      navigate('/chat');
+      navigate('/home');
     } catch (error) {
       console.error('error', error);
     }
@@ -71,9 +72,9 @@ const Login = (props) => {
   };
 
   return (
-    <div className="w-full min-h-[100vh] py-10 bg-primary-1 flex items-center">
+    <div className="w-full min-h-[100vh] py-10 bg-primary-1 flex items-center" style={{backgroundImage:`url(${bg})`}}>
       <div className="w-[65%] max-sm:flex-col h-[90%] mx-auto rounded-2xl flex max-md:w-[85%]">
-        <div className="flex flex-col w-[50%]  bg-primary-2 rounded-l-2xl p-5 text-center max-sm:w-[80%] max-sm:rounded-2xl max-sm:rounded-b-none mx-auto">
+        <div className="flex flex-col w-[50%] login-container rounded-r-none rounded-l-2xl p-5 text-center max-sm:w-[80%] max-sm:rounded-2xl max-sm:rounded-b-none mx-auto">
           <motion.div
             className="flex justify-center items-center mt-20"
             drag
@@ -114,7 +115,7 @@ const Login = (props) => {
           </motion.div>
         </div>
 
-        <div className="w-1/2 rounded-r-lg bg-primary-6 flex flex-col justify-center p-5 max-sm:w-[80%] max-sm:rounded-2xl max-sm:rounded-t-none mx-auto">
+        <div className="w-1/2 rounded-r-lg bg-primary-6 rounded-l-none flex flex-col justify-center p-5 max-sm:w-[80%] max-sm:rounded-2xl max-sm:rounded-t-none mx-auto">
           <h1 className="mx-auto my-10 text-4xl">BlockChain Website</h1>
           <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
             <input
