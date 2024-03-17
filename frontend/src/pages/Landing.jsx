@@ -89,9 +89,9 @@ const Landing = () => {
                 style={{
                   fontSize: `${Math.max(
                     1.35,
-                    2.5 + (220 - scrollPosition) / 75
+                    2.8 + (220 - scrollPosition) / 75
                   )}rem`,
-                  opacity: `${(300 - scrollPosition) / 1.2}%`,
+                  opacity: `${(350 - scrollPosition) / 1.2}%`,
                 }}
               >
                 Virtual Meetings, Real <span className="glowing ">Connections:</span>
