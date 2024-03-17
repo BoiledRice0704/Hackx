@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import "../App.css";
 import Mic from "../assets/microphone.png";
 import Stop from "../assets/stop-button.png"
-
+import '../assets/Home/home.css'
 const Home = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [isListening, setIsListening] = useState(false);
@@ -96,11 +96,11 @@ const Home = () => {
     synthesis.speak(utterance);
   };
   return (
-    <div>
+    <div className="w-[100vw] h-[100vh]">
       <Navbar />
-      <div className="container flex flex-col items-center justify-between">
-        <div className="upper">
-          <div className="promo bg-[#1D101A] text-white w-[41rem] h-fit pl-2 pr-2 mt-3">
+      <div className="w-3/4 container mx-auto border-2 border-[rgba(255,255,255,0.3)] h-[40rem] flex flex-col items-center justify-between">
+        <div className="upper w-3/4">
+          <div className="promo bg-[#1D101A] w-3/4 text-white mx-auto h-fit pl-2 pr-2 mt-3">
             <div className="carousel-container">
               <div className="text-carousel">
                 <div className="text">
