@@ -5,6 +5,7 @@ import learnIcon from "../assets/learn.png"
 import profileIcon from "../assets/grid.png"
 import dP from "../assets/profile.png"
 import meet from "../assets/meet.png"
+import chat from "../assets/chat.svg"
 import { Link } from 'react-router-dom'
 
 const Navbar = () => {
@@ -13,8 +14,9 @@ const Navbar = () => {
         <div className="flex w-1/2 justify-center">
             <div className="flex justify-center">
                 <a href="/home" className='p-1'><img src={homeIcon} style={{filter:"invert(1)",width:"30px"}}></img></a>
-                <a href="/learn-lang" className='p-1'><img src={learnIcon} className='w-[30px]' style={{filter:"invert(1)"}}></img></a>
+                <a href="/learn" className='p-1'><img src={learnIcon} className='w-[30px]' style={{filter:"invert(1)"}}></img></a>
                 <a href="#" className='p-1'><img src={meet} className=' w-[30px] backdrop-filter' ></img></a>
+                <Link to="/chat" className='p-1'><img src={chat} className=' w-[30px] backdrop-filter' style={{filter:"invert(1)"}}></img></Link>
             </div>
         </div>
 
