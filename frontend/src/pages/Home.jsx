@@ -114,10 +114,10 @@ const Home = () => {
 
           <div className="heading mt-4">
             <h1 className="animate-gradient-text text-5xl">
-              AI Voice Trainer <br />
+                  Multilingual <br />
             </h1>
             <h1 className="animate-gradient-text text-5xl">
-              for Any Commercial Product
+               anything to anything solution.
             </h1>
           </div>
         </div>
