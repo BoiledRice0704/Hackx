@@ -72,3 +72,7 @@ Our project presents a comprehensive language learning and communication solutio
 ## Acknowledgements
 
 - Special thanks to NMIMS for organizing the hackathon.
+
+##Demo Video
+
+- https://drive.google.com/uc?id=1xUMIiw2ZmjK65sarREL65yvH2G7nw_ZI&export=download
