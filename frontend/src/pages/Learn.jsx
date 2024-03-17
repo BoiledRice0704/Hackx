@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import "./style/learn.css";
 import sendBtn from "../assets/send.png";
@@ -6,32 +6,18 @@ import Mic from "../assets/microphone.png";
 
 const Learn = () => {
   const [lang, setLang] = useState(""); // Default language set to English
-  const [userInput, setUserInput] = useState(""); // User input
-  const [messages, setMessages] = useState([]); // Array to store messages
 
   const handleChange = (e) => {
     setLang(e.target.value);
   };
 
-  const handleSubmit = () => {
-    // Send user input to the API and get response
-    // Here, you would typically make an API call to your backend or external AI service
-    // For demonstration purpose, let's just echo the user's message for now
-    setMessages([...messages, { text: userInput, sender: "user" }]);
-    setUserInput(""); // Clear user input after sending
+  const scrollToNextPage = () => {
+    // Smooth scroll to the next page
+    window.scrollTo({
+      top: window.innerHeight, // Scroll down by the height of the window
+      behavior: "smooth", // Smooth scrolling behavior
+    });
   };
-
-  useEffect(() => {
-    // Here, you would typically fetch messages from an API
-    // For demonstration purpose, let's simulate receiving a response after 1 second
-    const timeout = setTimeout(() => {
-      // Simulate receiving a message from the AI
-      const aiMessage = { text: "This is a response from the AI.", sender: "ai" };
-      setMessages([...messages, aiMessage]);
-    }, 1000);
-
-    return () => clearTimeout(timeout);
-  }, [messages]); // Trigger effect whenever messages change
 
   return (
     <div>
@@ -60,36 +46,29 @@ const Learn = () => {
         </div>
         <div className="low flex justify-center text-white text-2xl">
           <div className="btns w-fit border p-3 pr-14 pl-14 rounded-2xl cursor-pointer flex">
-            <button className="flex items-center justify-between">Start Now</button>
+            <button
+              onClick={scrollToNextPage}
+              className="flex items-center justify-between"
+            >
+              Start Now
+            </button>
           </div>
         </div>
         <div className="learning mt-24 ml-7">
           <div className="ai flex h-10 ">
             <div className="inp bg-white w-[35rem] rounded-2xl flex items-center justify-between">
-              <input
-                type="text"
-                placeholder="Enter your text here"
-                className="ml-2"
-                value={userInput}
-                onChange={(e) => setUserInput(e.target.value)}
-              />
-              <div className="chatbtns w-fit flex justify-end pr-3">
-                <button onClick={handleSubmit}>
-                  <img src={Mic} alt="" width="17px" />
-                </button>
-                <button onClick={handleSubmit}>
-                  <img src={sendBtn} alt="" width="17px" />
-                </button>
-              </div>
+              <input type="text" placeholder="Enter your text here" className="ml-2"/>
+            <div className="chatbtns w-fit flex justify-end pr-3">
+              <button>
+                <img src={Mic} alt="" width="17px" />
+              </button>
+              <button>
+                <img src={sendBtn} alt="" width="17px" />
+              </button>
+            </div>
             </div>
           </div>
-          <div className="learner">
-            {messages.map((message, index) => (
-              <div key={index} className={message.sender === "user" ? "user-message" : "ai-message"}>
-                {message.text}
-              </div>
-            ))}
-          </div>
+          <div className="learner"></div>
         </div>
       </div>
     </div>
