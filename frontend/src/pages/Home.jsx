@@ -9,9 +9,10 @@ const Home = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState("");
-  const [selectedLanguage, setSelectedLanguage] = useState(0);
+  const [selectedLanguage, setSelectedLanguage] = useState('english');
   const [text, setText] = useState("");
   const handleChange = (event) => {
+    console.log(event.target.value);
     setSelectedLanguage(event.target.value);
   };
   const synthesis = window.speechSynthesis;
@@ -57,7 +58,7 @@ const Home = () => {
       recognition.onend = () => {
         setIsListening(false);
         console.log("Speech recognition ended");
-        sendTranscript();
+        sendTranscript(selectedLanguage);
       };
 
       recognition.start();
