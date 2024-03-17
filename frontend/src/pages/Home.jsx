@@ -95,7 +95,7 @@ const Home = () => {
   return (
     <div className="w-[100vw] h-[100vh]">
       <Navbar />
-      <div className="w-3/4 mx-auto border-2 border-[rgba(255,255,255,0.3)] h-[40rem] flex flex-col items-center justify-between">
+      <div className="w-3/4 container mx-auto border-2 border-[rgba(255,255,255,0.3)] h-[40rem] flex flex-col items-center justify-between">
         <div className="upper w-3/4">
           <div className="promo bg-[#1D101A] w-3/4 text-white mx-auto h-fit pl-2 pr-2 mt-3">
             <div className="carousel-container">
