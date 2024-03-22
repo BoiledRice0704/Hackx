@@ -39,6 +39,10 @@ app.post("/api/translate_input_to_hindi", (req, res) => {
 app.post("/api/translate_input_to_spanish", (req, res) => {
   controller.audioInputToSpanish(req, res);
 });
+app.post("/api/learn_lang", (req, res) => {
+  controller.learnLang(req, res);
+});
+
 
 // Chat
 const CHAT_ENGINE_PROJECT_ID = "87c6440b-34b9-4708-b948-9a8ebd47ecd7";
